@@ -10,3 +10,5 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - Premier commit `40512f0` (« Initial commit: Rational Swift package ») sur `main` : `.gitignore`, `CLAUDE.md`, `Package.swift`, `Sources/`, `Tests/`. Rien n'a été poussé.
 - Création de `claude_history.md` (ce fichier).
 - Commit de `claude_history.md` (journal des actions).
+- Écriture des tests dans `Tests/RationalTests/RationalTests.swift` (réduction, normalisation du signe, dénominateur nul, `description`), en remplaçant le `@Test` vide en cours ; `swift test` : 18 cas passent.
+- Commit de tout (sign normalization + `description` dans `Rational.swift`, tests, journal) puis push sur `origin/main`.
