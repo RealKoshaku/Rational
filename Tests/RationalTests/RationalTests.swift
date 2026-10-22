@@ -24,16 +24,16 @@ struct Case: Sendable, CustomTestStringConvertible {
     Case(num: 0, den: 5, expectedNum: 0, expectedDen: 1),
     Case(num: 0, den: -5, expectedNum: 0, expectedDen: 1),
 ])
-func reduction(_ c: Case) throws {
-    let r = try Rational(num: c.num, den: c.den)
+func reduction(_ c: Case) {
+    let r = Rational(num: c.num, den: c.den)
     #expect(r.num == c.expectedNum)
     #expect(r.den == c.expectedDen)
 }
 
-@Test("Zero denominator throws", arguments: [-3, 0, 4])
-func zeroDenominator(num: Int) {
-    #expect(throws: RationalError.zeroAtDenominator) {
-        try Rational(num: num, den: 0)
+@Test("Zero denominator is a precondition failure", arguments: [-3, 0, 4])
+func zeroDenominator(num: Int) async {
+    await #expect(processExitsWith: .failure) { [num] in
+        _ = Rational(num: num, den: 0)
     }
 }
 
@@ -42,6 +42,6 @@ func zeroDenominator(num: Int) {
     (2, -4, "-1 / 2"),
     (0, 3, "0 / 1"),
 ])
-func description(num: Int, den: Int, expected: String) throws {
-    #expect(try Rational(num: num, den: den).description == expected)
+func description(num: Int, den: Int, expected: String) {
+    #expect(Rational(num: num, den: den).description == expected)
 }

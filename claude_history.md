@@ -12,3 +12,7 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - Commit de `claude_history.md` (journal des actions).
 - Écriture des tests dans `Tests/RationalTests/RationalTests.swift` (réduction, normalisation du signe, dénominateur nul, `description`), en remplaçant le `@Test` vide en cours ; `swift test` : 18 cas passent.
 - Commit de tout (sign normalization + `description` dans `Rational.swift`, tests, journal) puis push sur `origin/main`.
+- Mise à jour de la note de `CLAUDE.md` sur `pgcd` / normalisation du signe (désormais gérée dans `Rational.init`).
+- 2026-10-22 : `/init` relancé ; `CLAUDE.md` mis à jour (init non-throwing avec `precondition`, `pgcd` public dans `Tools.swift`, `private(set)`).
+- Réparation des tests : `try` retirés, test du dénominateur nul remplacé par un exit test (`processExitsWith: .failure`) ; `swift test` : 3 tests, 18 cas passent.
+- Commit de tout (init non-throwing, `Tools.swift`, tests réparés, `CLAUDE.md`, journal) puis push sur `origin/main`.
