@@ -16,3 +16,9 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - 2026-10-22 : `/init` relancé ; `CLAUDE.md` mis à jour (init non-throwing avec `precondition`, `pgcd` public dans `Tools.swift`, `private(set)`).
 - Réparation des tests : `try` retirés, test du dénominateur nul remplacé par un exit test (`processExitsWith: .failure`) ; `swift test` : 3 tests, 18 cas passent.
 - Commit de tout (init non-throwing, `Tools.swift`, tests réparés, `CLAUDE.md`, journal) puis push sur `origin/main`.
+- 2026-10-22 : `/init` relancé ; `CLAUDE.md` déjà exact, ajout de deux notes (format de `description`, rôle de `claude_history.md`).
+- 2026-10-22 : création de `TODO.md` (feuille de route du module, sans code).
+- 2026-10-22 : ajout du target exécutable `Demo` (`Package.swift`) et de `Sources/Demo/main.swift` pour tester l'init, `description` et `pgcd`.
+- 2026-10-22 : `Demo/main.swift` complété (inits de commodité, `==`). Build bloqué par `Sources/Rational/main.swift` (créé par l'utilisateur, non touché).
+- 2026-10-22 : `CLAUDE.md` mis à jour (suppression de `RationalError`, target `Demo`, `TODO.md`, inits de commodité, `==`, interdiction de `main.swift` dans la lib).
+- 2026-10-22 : commit de tout (inits de commodité, `==`, suppression de `RationalError`, target `Demo`, `TODO.md`, `CLAUDE.md`, journal) puis push sur `origin/main`.

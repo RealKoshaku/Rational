@@ -21,6 +21,13 @@ let package = Package(
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
         ),
+        .executableTarget(
+            name: "Demo",
+            dependencies: ["Rational"],
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency"),
+            ],
+        ),
         .testTarget(
             name: "RationalTests",
             dependencies: ["Rational"],

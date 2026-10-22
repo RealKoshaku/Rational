@@ -3,13 +3,10 @@
 
 import Foundation
 
-enum RationalError: Error {
-    case zeroAtDenominator
-}
-
 public struct Rational {
     private(set) var num: Int
     private(set) var den: Int
+    
     public init(num: Int, den: Int) {
         precondition(den != 0, "Zero at denominator") // a/b with b != 0
         
@@ -20,10 +17,24 @@ public struct Rational {
         self.den = sgn * den / gcd
     }
     
+    public init(num: Int) {
+        self.init(num: num, den: 1)
+    }
+    
+    public init() {
+        self.init(num: 0)
+    }
+    
 }
 
 extension Rational: CustomStringConvertible {
     public var description: String {
         "\(num) / \(den)"
+    }
+}
+
+extension Rational: Equatable {
+    public static func == (lhs: Rational, rhs: Rational) -> Bool {
+        return lhs.num * rhs.den == lhs.den * rhs.num
     }
 }
