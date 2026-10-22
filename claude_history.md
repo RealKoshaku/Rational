@@ -22,3 +22,6 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - 2026-10-22 : `Demo/main.swift` complété (inits de commodité, `==`). Build bloqué par `Sources/Rational/main.swift` (créé par l'utilisateur, non touché).
 - 2026-10-22 : `CLAUDE.md` mis à jour (suppression de `RationalError`, target `Demo`, `TODO.md`, inits de commodité, `==`, interdiction de `main.swift` dans la lib).
 - 2026-10-22 : commit de tout (inits de commodité, `==`, suppression de `RationalError`, target `Demo`, `TODO.md`, `CLAUDE.md`, journal) puis push sur `origin/main`.
+- 2026-10-22 : création de `README.md` (version gagnante d'une arène de 3 agents, en anglais). Dossier `.arena/` créé à la racine (non commité).
+- 2026-10-22 : ajout de `.arena/` au `.gitignore`.
+- 2026-10-22 : ajout de `.swiftpm/` au `.gitignore`, `CLAUDE.md` corrigé (README existe), commit de tout puis push sur `origin/main`.

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-`Rational` is a small Swift Package Manager library (a single `Rational` library product) implementing a rational-number type. It is early-stage: `Sources/Rational/Rational.swift` holds the `Rational` struct (with `Equatable` and `CustomStringConvertible` conformances) and `Sources/Rational/Tools.swift` holds the public `pgcd` helper. `Sources/Demo/main.swift` is a throwaway executable target for trying the library by hand. `TODO.md` is the owner's roadmap; the owner is writing the code themselves, so don't implement roadmap items unless asked. There is no README, CI, or lint config.
+`Rational` is a small Swift Package Manager library (a single `Rational` library product) implementing a rational-number type. It is early-stage: `Sources/Rational/Rational.swift` holds the `Rational` struct (with `Equatable` and `CustomStringConvertible` conformances) and `Sources/Rational/Tools.swift` holds the public `pgcd` helper. `Sources/Demo/main.swift` is a throwaway executable target for trying the library by hand. `TODO.md` is the owner's roadmap; the owner is writing the code themselves, so don't implement roadmap items unless asked. `README.md` documents usage for consumers. There is no CI or lint config.
 
 ## Commands
 

@@ -11,7 +11,7 @@ Prochaines étapes, dans un ordre conseillé. Chaque étape doit conserver l'inv
 
 ## 2. Conformances de base
 
-- [ ] `Equatable` : grâce à la forme réduite, l'égalité peut comparer `num` et `den` directement (vérifier que c'est bien suffisant).
+- [x] `Equatable` : grâce à la forme réduite, l'égalité peut comparer `num` et `den` directement (vérifier que c'est bien suffisant).
 - [ ] `Hashable` : cohérent avec `==`.
 - [ ] `Comparable` : comparer `a/b` et `c/d` sans passer par des flottants (attention au signe et au débordement).
 - [ ] Tests : égalité de formes équivalentes (`1/2` == `2/4` == `-1/-2`), ordre avec des négatifs, zéro.
