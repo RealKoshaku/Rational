@@ -27,3 +27,6 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - 2026-10-22 : ajout de `.swiftpm/` au `.gitignore`, `CLAUDE.md` corrigé (README existe), commit de tout puis push sur `origin/main`.
 - 2026-10-22 : `Rational.swift` : ajout du `return` manquant dans l'opérateur `/` (`lhs * inverse(rhs)`), corrige l'erreur de compilation ligne 65.
 - 2026-10-22 : commit des opérateurs `+ - * /` (avec surcharges `Int`, bug de `*` corrigé par l'utilisateur) puis push sur `origin/main`.
+- 2026-10-22 : `RationalTests.swift` réécrit (pgcd, inits, `==`, `+ - * /`, surcharges `Int`, propriétés algébriques, divisions par zéro) ; 20 tests passent, et le bug `lhs.den * lhs.den` réintroduit dans une copie est détecté. Non commité.
+- 2026-10-22 : `swift test` échouait (« TestingMacros not found ») à cause d'un `.build` incohérent ; `.build` supprimé puis régénéré, 20 tests passent.
+- 2026-10-22 : commit des tests réécrits puis push sur `origin/main`.
