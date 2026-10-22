@@ -25,3 +25,5 @@ Journal de ce que Claude Code fait dans ce dépôt (le plus récent en bas).
 - 2026-10-22 : création de `README.md` (version gagnante d'une arène de 3 agents, en anglais). Dossier `.arena/` créé à la racine (non commité).
 - 2026-10-22 : ajout de `.arena/` au `.gitignore`.
 - 2026-10-22 : ajout de `.swiftpm/` au `.gitignore`, `CLAUDE.md` corrigé (README existe), commit de tout puis push sur `origin/main`.
+- 2026-10-22 : `Rational.swift` : ajout du `return` manquant dans l'opérateur `/` (`lhs * inverse(rhs)`), corrige l'erreur de compilation ligne 65.
+- 2026-10-22 : commit des opérateurs `+ - * /` (avec surcharges `Int`, bug de `*` corrigé par l'utilisateur) puis push sur `origin/main`.

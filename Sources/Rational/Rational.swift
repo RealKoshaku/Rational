@@ -33,6 +33,61 @@ extension Rational: CustomStringConvertible {
     }
 }
 
+extension Rational {
+    // Addition
+    public static func + (lhs: Rational, rhs: Rational) -> Rational {
+        return Rational(num: lhs.num * rhs.den + lhs.den * rhs.num, den: lhs.den * rhs.den)
+    }
+    
+    public static func + (lhs: Int, rhs: Rational) -> Rational {
+        return Rational(num: lhs) + rhs
+    }
+    
+    public static func + (lhs: Rational, rhs: Int) -> Rational {
+        return lhs + Rational(num: rhs)
+    }
+    
+    // Soustraction
+    public static func - (lhs: Rational, rhs: Rational) -> Rational {
+        return lhs + Rational(num: -rhs.num, den: rhs.den)
+    }
+    
+    public static func - (lhs: Rational, rhs: Int) -> Rational {
+        return lhs - Rational(num: rhs)
+    }
+    
+    public static func - (lhs: Int, rhs: Rational) -> Rational {
+        return Rational(num: lhs) - rhs
+    }
+    
+    // Multiplication
+    public static func * (lhs: Rational, rhs: Rational) -> Rational {
+        return Rational(num: lhs.num * rhs.num, den: lhs.den * rhs.den)
+    }
+    
+    public static func * (lhs: Int, rhs: Rational) -> Rational {
+        return Rational(num: lhs) * rhs
+    }
+    
+    public static func * (lhs: Rational, rhs: Int) -> Rational {
+        return rhs * lhs
+    }
+    
+    // Division
+    public static func / (lhs: Rational, rhs: Rational) -> Rational {
+        precondition(rhs.num != 0, "Cannot divide by zero.")
+        return Rational(num: lhs.num * rhs.den, den: lhs.den * rhs.num)
+    }
+    
+    public static func / (lhs: Rational, rhs: Int) -> Rational {
+        return lhs / Rational(num: rhs)
+    }
+    
+    public static func / (lhs: Int, rhs: Rational) -> Rational {
+        return Rational(num: lhs) / rhs
+    }
+}
+
 extension Rational: Equatable {
     public static func == (lhs: Rational, rhs: Rational) -> Bool {
         return lhs.num * rhs.den == lhs.den * rhs.num
