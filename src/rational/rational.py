@@ -16,3 +16,22 @@ class Rational:
         if not isinstance(value, Rational):
             return NotImplemented
         return self.num * value.den == self.den * value.num
+
+    def __add__(self, other: object) -> Rational:
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
+
+    def __sub__(self, other: object) -> Rational:
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return self + Rational(-other.num, other.den)
+
+    def __mul__(self, other):
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return Rational(self.num * other.num, self.den * other.den)
+
+
+    def __str__(self) -> str:
+        return f"{self.num} / {self.den}"
