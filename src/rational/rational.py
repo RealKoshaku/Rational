@@ -32,6 +32,10 @@ class Rational:
             return NotImplemented
         return Rational(self.num * other.num, self.den * other.den)
 
+    def __truediv__(self, other):
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return Rational(self.num * other.den, self.den * other.num)
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
