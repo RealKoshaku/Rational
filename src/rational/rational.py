@@ -39,3 +39,6 @@ class Rational:
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
+
+    def __repr__(self) -> str:
+        return f"Rational({self.num}, {self.den})"
