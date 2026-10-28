@@ -7,7 +7,9 @@ authors = [
     { name = "Adahy Plas", email = "plasadahy0@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "pytest>=9.1.1",
+]
 
 [project.scripts]
 rational = "rational:main"
@@ -15,3 +17,8 @@ rational = "rational:main"
 [build-system]
 requires = ["uv_build>=0.12.6,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"] # evite les erreurs d’import
+addopts = "-ra --strict-markers --import-mode=importlib"
