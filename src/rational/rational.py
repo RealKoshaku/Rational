@@ -32,7 +32,7 @@ class Rational:
             return NotImplemented
         return Rational(self.num * other.num, self.den * other.den)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other) -> Rational:
         if not isinstance(other, Rational):
             return NotImplemented
         return Rational(self.num * other.den, self.den * other.num)
