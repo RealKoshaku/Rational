@@ -35,6 +35,10 @@ class Rational:
     def __truediv__(self, other) -> Rational:
         if not isinstance(other, Rational):
             return NotImplemented
+        
+        if other == Rational():
+            raise ZeroDivisionError(f"cannot divide by {repr(other)}")
+
         return Rational(self.num * other.den, self.den * other.num)
 
     def __str__(self) -> str:
