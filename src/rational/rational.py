@@ -27,7 +27,7 @@ class Rational:
             return NotImplemented
         return self + Rational(-other.num, other.den)
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> Rational:
         if not isinstance(other, Rational):
             return NotImplemented
         return Rational(self.num * other.num, self.den * other.den)
