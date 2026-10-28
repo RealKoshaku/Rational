@@ -13,9 +13,12 @@ class Rational:
         self.den: int = sign_den * den // gcd_value
 
     def __eq__(self, value: object, /) -> bool:
-        if not isinstance(value, Rational):
-            return NotImplemented
-        return self.num * value.den == self.den * value.num
+        if isinstance(value, Rational):
+            return self.num * value.den == self.den * value.num
+        elif isinstance(value, int):
+            return self == Rational(value)
+        return NotImplemented
+
 
     def __add__(self, other: object) -> Rational:
         if not isinstance(other, Rational):
