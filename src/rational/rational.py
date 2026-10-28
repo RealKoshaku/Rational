@@ -2,7 +2,7 @@ from math import gcd
 
 
 class Rational:
-    def __init__(self, num: int, den: int) -> None:
+    def __init__(self, num: int = 0, den: int = 1) -> None:
         if den == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
 
