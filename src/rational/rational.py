@@ -1,16 +1,24 @@
 from math import gcd
+from dataclasses import dataclass
 
-
+@dataclass(frozen=True,slots=True)
 class Rational:
-    def __init__(self, num: int = 0, den: int = 1) -> None:
-        if den == 0:
-            raise ZeroDivisionError("Cannot divide by zero.")
+    num: int = 0
+    den: int = 1
 
-        gcd_value: int = gcd(num, den)
-        sign_den: int = abs(den) // den  # Sign of denominator
+    def __post_init__(self) -> None:
+        for value in (self.num, self.den):
+            if isinstance(value, bool) or isinstance(value, int):
+                raise TypeError(f"num and den must be int, not {type(value).__name__}")
+            if self.den == 0:
+                raise ZeroDivisionError("Cannot divide by zero.")
+            num, den = self.num, self.den
 
-        self.num: int = sign_den * num // gcd_value
-        self.den: int = sign_den * den // gcd_value
+            sign_den: int = abs(den) // den
+            g: int = gcd(num, den)
+
+            object.__setattr__(self, "num", sign_den * num // g)
+            object.__setattr__(self, "den", sign_den * den // g)
 
     def __eq__(self, value: object, /) -> bool:
         if isinstance(value, Rational):
@@ -21,14 +29,18 @@ class Rational:
 
 
     def __add__(self, other: object) -> Rational:
-        if not isinstance(other, Rational):
-            return NotImplemented
-        return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
+        if isinstance(other, Rational):
+            return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
+        elif isinstance(other, int):
+            return self + Rational(other)
+        return NotImplemented
 
     def __sub__(self, other: object) -> Rational:
-        if not isinstance(other, Rational):
-            return NotImplemented
-        return self + Rational(-other.num, other.den)
+        if isinstance(other, Rational):
+            return self + (-other)
+        elif isinstance(other, int):
+            return self + (-Rational(other))
+        return NotImplemented
 
     def __mul__(self, other) -> Rational:
         if not isinstance(other, Rational):
@@ -45,8 +57,8 @@ class Rational:
         return Rational(self.num * other.den, self.den * other.num)
 
     def __neg__(self):
-        return Rational() - self;
-    
+        return Rational() - self
+
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
 
