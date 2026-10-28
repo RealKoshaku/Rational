@@ -20,12 +20,10 @@ class Rational:
             object.__setattr__(self, "num", sign_den * num // g)
             object.__setattr__(self, "den", sign_den * den // g)
 
-    def __eq__(self, value: object, /) -> bool:
-        if isinstance(value, Rational):
-            return self.num * value.den == self.den * value.num
-        elif isinstance(value, int):
-            return self == Rational(value)
-        return NotImplemented
+    def __hash__(self) -> int:
+        if self.den == 1:
+            return hash(self.num)
+        return hash((self.num, self.den))
 
 
     def __add__(self, other: object) -> Rational:
