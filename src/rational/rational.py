@@ -25,6 +25,14 @@ class Rational:
             return hash(self.num)
         return hash((self.num, self.den))
 
+    def __eq__(self, value: object) -> bool:
+        if isinstance(value, Rational):
+            return (self.num, self.den) == (value.num, value.den)
+        if isinstance(value, bool):
+            return NotImplemented
+        if isinstance(value, int):
+            return (self.num, self.den) == (value, 1)
+        return NotImplemented
 
     def __add__(self, other: object) -> Rational:
         if isinstance(other, Rational):
