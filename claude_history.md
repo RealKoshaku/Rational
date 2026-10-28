@@ -9,3 +9,5 @@
 - 2026-10-28 — Commit et push des tests améliorés, de `CLAUDE.md` et de `claude_history.md`.
 - 2026-10-28 — `tests/unit/test_rational.py` : les tests de +, -, * et / comparent maintenant `(num, den)` (vérifie aussi la normalisation).
 - 2026-10-28 — Commit et push de la correction des tests (comparaison de tuples) et du saut de ligne final de `pyproject.toml`.
+- 2026-10-28 — Création de `ROADMAP.md` (roadmap cochable du projet).
+- 2026-10-28 — Commit et push de `ROADMAP.md`.
