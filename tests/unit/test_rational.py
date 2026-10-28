@@ -9,6 +9,11 @@ def R(num: int, den: int = 1) -> Rational:
     return Rational(num, den)
 
 
+def paire(r: Rational) -> tuple[int, int]:
+    """(num, den) : contrairement à ==, vérifie aussi la normalisation."""
+    return r.num, r.den
+
+
 @pytest.mark.parametrize(
     "num, den, attendu_num, attendu_den",
     [
@@ -78,59 +83,59 @@ def test_rational_equality_autre_type(autre):
 @pytest.mark.parametrize(
     "a, b, attendu",
     [
-        (R(1, 2), R(1, 3), R(5, 6)),
-        (R(1, 2), R(1, 2), R(1)),
-        (R(1, 2), R(-1, 2), R(0)),
-        (R(-1, 3), R(-1, 6), R(-1, 2)),
-        (R(0), R(2, 5), R(2, 5)),
+        (R(1, 2), R(1, 3), (5, 6)),
+        (R(1, 2), R(1, 2), (1, 1)),
+        (R(1, 2), R(-1, 2), (0, 1)),
+        (R(-1, 3), R(-1, 6), (-1, 2)),
+        (R(0), R(2, 5), (2, 5)),
     ],
 )
 def test_rational_add(a, b, attendu):
-    assert a + b == attendu
-    assert b + a == attendu  # commutativité
+    assert paire(a + b) == attendu
+    assert paire(b + a) == attendu  # commutativité
 
 
 @pytest.mark.parametrize(
     "a, b, attendu",
     [
-        (R(1, 2), R(1, 3), R(1, 6)),
-        (R(1, 3), R(1, 2), R(-1, 6)),
-        (R(1, 2), R(1, 2), R(0)),
-        (R(1, 2), R(-1, 2), R(1)),
-        (R(2, 5), R(0), R(2, 5)),
+        (R(1, 2), R(1, 3), (1, 6)),
+        (R(1, 3), R(1, 2), (-1, 6)),
+        (R(1, 2), R(1, 2), (0, 1)),
+        (R(1, 2), R(-1, 2), (1, 1)),
+        (R(2, 5), R(0), (2, 5)),
     ],
 )
 def test_rational_sub(a, b, attendu):
-    assert a - b == attendu
+    assert paire(a - b) == attendu
 
 
 @pytest.mark.parametrize(
     "a, b, attendu",
     [
-        (R(1, 2), R(2, 3), R(1, 3)),
-        (R(-1, 2), R(2, 3), R(-1, 3)),
-        (R(-1, 2), R(-2, 3), R(1, 3)),
-        (R(3, 4), R(0), R(0)),
-        (R(3, 4), R(1), R(3, 4)),
+        (R(1, 2), R(2, 3), (1, 3)),
+        (R(-1, 2), R(2, 3), (-1, 3)),
+        (R(-1, 2), R(-2, 3), (1, 3)),
+        (R(3, 4), R(0), (0, 1)),
+        (R(3, 4), R(1), (3, 4)),
     ],
 )
 def test_rational_mul(a, b, attendu):
-    assert a * b == attendu
-    assert b * a == attendu  # commutativité
+    assert paire(a * b) == attendu
+    assert paire(b * a) == attendu  # commutativité
 
 
 @pytest.mark.parametrize(
     "a, b, attendu",
     [
-        (R(1, 2), R(1, 4), R(2)),
-        (R(1, 2), R(-1, 4), R(-2)),
-        (R(-1, 2), R(-1, 4), R(2)),
-        (R(0), R(3, 5), R(0)),
-        (R(3, 4), R(1), R(3, 4)),
+        (R(1, 2), R(1, 4), (2, 1)),
+        (R(1, 2), R(-1, 4), (-2, 1)),
+        (R(-1, 2), R(-1, 4), (2, 1)),
+        (R(0), R(3, 5), (0, 1)),
+        (R(3, 4), R(1), (3, 4)),
     ],
 )
 def test_rational_truediv(a, b, attendu):
-    assert a / b == attendu
+    assert paire(a / b) == attendu
 
 
 def test_rational_truediv_par_zero():
