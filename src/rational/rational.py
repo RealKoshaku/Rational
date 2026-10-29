@@ -34,21 +34,7 @@ class Rational:
             return (self.num, self.den) == (value, 1)
         return NotImplemented
 
-    def __add__(self, other: object) -> Rational:
-        if isinstance(other, Rational):
-            return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
-        elif isinstance(other, int):
-            return self + Rational(other)
-        return NotImplemented
-
-    def __sub__(self, other: object) -> Rational:
-        if isinstance(other, Rational):
-            return self + (-other)
-        elif isinstance(other, int):
-            return self + (-Rational(other))
-        return NotImplemented
-
-    def __mul__(self, other) -> Rational:
+    def __lt__(self, other: object):
         if not isinstance(other, Rational):
             return NotImplemented
         return Rational(self.num * other.num, self.den * other.den)
