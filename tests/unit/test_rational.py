@@ -1,9 +1,10 @@
 import math
-
-from hypothesis import given, strategies as st
 import operator
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
+
 from rational.rational import Rational
 
 
@@ -780,7 +781,7 @@ def test_neg(a, attendu):
 
 @pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0), R(5)])
 def test_neg_proprietes(a):
-    assert -(-a) == a
+    assert - (-a) == a  # noqa: B002
     assert a + (-a) == R(0)
     assert a - a == a + (-a)
     assert -a == R(0) - a
