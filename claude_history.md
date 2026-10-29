@@ -25,3 +25,4 @@
 - 2026-10-29 — Commits et push des comparaisons avec `int` (rational.py, tests).
 - 2026-10-29 — Ajout de `__pow__` et de ses tests, cases `__pow__` et « Tests pour chaque nouvel opérateur » cochées dans `ROADMAP.md`; commits et push.
 - 2026-10-29 — Rédaction de `README.md` en anglais (installation, usage, opérations supportées, développement).
+- 2026-10-29 — Précision dans `README.md` : `==`/`!=` ne lèvent pas `TypeError` pour les types non supportés.
