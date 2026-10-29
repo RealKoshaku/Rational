@@ -30,9 +30,9 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 
 ## 3. Interopérabilité
 
-- [ ] Accepter les `int` dans les opérateurs (`Rational(1, 2) + 1`)
-- [ ] Opérateurs inverses `__radd__`, `__rsub__`, `__rmul__`, `__rtruediv__` (`1 + Rational(1, 2)`)
-- [ ] `__eq__` avec un `int` (`Rational(2, 1) == 2`)
+- [x] Accepter les `int` dans les opérateurs (`Rational(1, 2) + 1`)
+- [x] Opérateurs inverses `__radd__`, `__rsub__`, `__rmul__`, `__rtruediv__` (`1 + Rational(1, 2)`)
+- [x] `__eq__` avec un `int` (`Rational(2, 1) == 2`)
 - [ ] `__float__` et `__int__`
 - [ ] Construction depuis une chaîne (`"3/4"`) et/ou un `float`
 - [ ] Mettre à jour les tests : les cas « autre type » avec `int` ne doivent plus lever `TypeError`
