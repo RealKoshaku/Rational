@@ -988,6 +988,70 @@ def test_from_float_propriete_hypothesis(x):
     assert math.gcd(r.num, r.den) == 1
 
 
+# --- Conversion en float --------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("r", "attendu"),
+    [
+        (R(1, 2), 0.5),
+        (R(-3, 4), -0.75),
+        (R(0), 0.0),
+        (R(5), 5.0),
+        (R(-7), -7.0),
+        (R(1, 3), 1 / 3),
+        (R(2, 3), 2 / 3),
+        (R(1, 10), 0.1),
+        (R(22, 7), 22 / 7),
+    ],
+)
+def test_float(r, attendu):
+    assert float(r) == attendu
+
+
+def test_float_retourne_un_float():
+    assert type(float(R(1, 2))) is float
+    assert type(float(R(3))) is float
+
+
+def test_float_zero_signe():
+    assert math.copysign(1, float(R(0))) == 1.0
+
+
+@pytest.mark.parametrize("x", [0.5, 0.1, -3.125, 1e-300, 1e300, 2**-1074, 0.0])
+def test_float_aller_retour(x):
+    assert float(Rational.from_float(x)) == x
+
+
+def test_float_arrondi_correct_pour_grands_entiers():
+    # num et den dépassent la plage d'un float, mais le quotient est correct
+    assert float(R(10**400, 3 * 10**400)) == 1 / 3
+    assert float(R(10**400 + 1, 10**400)) == 1.0
+
+
+def test_float_trop_grand():
+    with pytest.raises(OverflowError):
+        float(R(10**400))
+
+
+def test_float_tres_petit_donne_zero():
+    assert float(R(1, 10**400)) == 0.0
+
+
+def test_float_conserve_l_ordre():
+    assert float(R(1, 3)) < float(R(1, 2)) < float(R(2, 3))
+
+
+def test_float_coherent_avec_fraction():
+    r = R(-355, 113)
+    assert float(r) == float(fraction(r))
+
+
+@given(st.floats(allow_nan=False, allow_infinity=False))
+def test_float_aller_retour_hypothesis(x):
+    assert float(Rational.from_float(x)) == x
+
+
 # --- Types non supportés --------------------------------------------------
 
 
@@ -1042,3 +1106,8 @@ def test_add_normalized(a, b):
     r = a + b
     assert math.gcd(r.num, r.den) == 1
     assert r.den > 0
+
+
+@given(rationnels)
+def test_float_propriete_hypothesis(r):
+    assert float(r) == float(fraction(r))
