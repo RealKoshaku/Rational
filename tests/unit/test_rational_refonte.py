@@ -651,6 +651,110 @@ def test_operateurs_augmentes_int_gauche():
     assert paire(n) == (6, 1)
 
 
+# --- Puissance ------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), 0, (1, 1)),
+        (R(1, 2), 1, (1, 2)),
+        (R(1, 2), 2, (1, 4)),
+        (R(2, 3), 3, (8, 27)),
+        (R(-1, 2), 2, (1, 4)),
+        (R(-1, 2), 3, (-1, 8)),
+        (R(3), 4, (81, 1)),
+        (R(0), 3, (0, 1)),
+        (R(0), 0, (1, 1)),  # 0**0 == 1, comme pour int
+        (R(1), 100, (1, 1)),
+        (R(-1), 101, (-1, 1)),
+        (R(-1), 100, (1, 1)),
+        (R(2, 4), 2, (1, 4)),  # base non réduite à l'origine
+        (R(10, 3), 20, (10**20, 3**20)),
+    ],
+)
+def test_pow_positif(a, n, attendu):
+    assert paire(a**n) == attendu
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), -1, (2, 1)),
+        (R(1, 2), -2, (4, 1)),
+        (R(2, 3), -3, (27, 8)),
+        (R(-1, 2), -1, (-2, 1)),
+        (R(-1, 2), -2, (4, 1)),
+        (R(-1, 2), -3, (-8, 1)),
+        (R(3), -2, (1, 9)),
+        (R(-3), -3, (-1, 27)),  # signe porté par le numérateur
+        (R(1), -5, (1, 1)),
+        (R(-1), -5, (-1, 1)),
+        (R(6, 4), -2, (4, 9)),
+    ],
+)
+def test_pow_negatif(a, n, attendu):
+    assert paire(a**n) == attendu
+
+
+@pytest.mark.parametrize("n", [-1, -2, -10])
+def test_pow_zero_exposant_negatif(n):
+    with pytest.raises(ZeroDivisionError):
+        R(0) ** n
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-2, 3), R(5), R(-7, 4)])
+@pytest.mark.parametrize("n", [-3, -1, 0, 1, 2, 5])
+def test_pow_proprietes(a, n):
+    assert a**n * a**-n == R(1)
+    assert a ** (n + 1) == a**n * a
+    assert a**-n == R(1) / a**n
+    assert (a**n) ** 2 == a ** (2 * n)
+    assert a**n == pow(a, n)
+
+
+@pytest.mark.parametrize("a, b", [(R(1, 2), R(2, 3)), (R(-3, 4), R(5, 2))])
+@pytest.mark.parametrize("n", [-2, 0, 3])
+def test_pow_distributif_sur_produit(a, b, n):
+    assert (a * b) ** n == a**n * b**n
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0), R(5)])
+def test_pow_cas_simples(a):
+    assert a**0 == R(1)
+    assert a**1 == a
+    assert a**2 == a * a
+
+
+def test_pow_retourne_normalise_et_hashable():
+    r = R(2, 4) ** 3
+    assert paire(r) == (1, 8)
+    assert hash(R(2) ** 3) == hash(8)
+
+
+@pytest.mark.parametrize("autre", [True, False])
+def test_pow_exposant_bool_refuse(autre):
+    with pytest.raises(TypeError):
+        R(1, 2) ** autre
+
+
+@pytest.mark.parametrize("autre", [0.5, 2.0, "2", None, R(2)])
+def test_pow_exposant_autre_type(autre):
+    with pytest.raises(TypeError):
+        R(1, 2) ** autre
+
+
+@pytest.mark.parametrize("autre", [0.5, "2", None, True, R(2)])
+def test_pow_methode_retourne_not_implemented(autre):
+    assert R(1, 2).__pow__(autre) is NotImplemented
+
+
+def test_pow_base_int_non_supportee():
+    # pas de __rpow__ : int ** Rational n'a pas de sens pour un exposant rationnel
+    with pytest.raises(TypeError):
+        2 ** R(1, 2)
+
+
 # --- Négation, valeur absolue, booléen ------------------------------------
 
 
