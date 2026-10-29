@@ -1,4 +1,4 @@
-from ast import Raise
+from dataclasses import dataclass
 from math import gcd
 from dataclasses import dataclass
 
