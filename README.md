@@ -15,7 +15,7 @@ cd Rational
 uv sync
 ```
 
-`uv sync` also installs the `dev` dependency group (`pytest`, `hypothesis`, `ruff`, `pyright`).
+`uv sync` also installs the `dev` dependency group (`pytest`, `pytest-cov`, `hypothesis`, `ruff`, `pyright`).
 
 ## Usage
 
@@ -72,12 +72,13 @@ Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotIm
 ```sh
 uv run pytest                                            # run all tests
 uv run pytest tests/unit/test_rational.py::test_str      # run a single test
+uv run pytest --cov=rational --cov-report=term-missing   # run tests with coverage (currently 100%)
 uv run ruff check                                        # lint (currently passes with no errors)
 uv run ruff format                                       # format the code (currently already formatted)
 uv run pyright                                           # type-check src/ in strict mode (currently passes)
 ```
 
-Tests use `pytest` (with `@pytest.mark.parametrize`) and `hypothesis` for property-based checks. `ruff` is used both as a linter and as a formatter (the repository has no `[tool.ruff]` configuration yet, so default formatting applies). `pyright` type-checks `src/` only, in `strict` mode (see `[tool.pyright]` in `pyproject.toml`); the tests are not type-checked. See [`ROADMAP.md`](ROADMAP.md) for planned work.
+Tests use `pytest` (with `@pytest.mark.parametrize`) and `hypothesis` for property-based checks; `pytest-cov` measures coverage of `src/rational`. `ruff` is used both as a linter and as a formatter (the repository has no `[tool.ruff]` configuration yet, so default formatting applies). `pyright` type-checks `src/` only, in `strict` mode (see `[tool.pyright]` in `pyproject.toml`); the tests are not type-checked. See [`ROADMAP.md`](ROADMAP.md) for planned work.
 
 ## Project layout
 
