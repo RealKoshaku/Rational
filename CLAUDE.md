@@ -11,7 +11,7 @@ Small learning project: a `Rational` (fraction) class in Python, managed with `u
 - `uv sync` — create/refresh `.venv`
 - `uv run pytest` — run all tests (config in `[tool.pytest.ini_options]`: `testpaths=["tests"]`, `pythonpath=["src"]`, `--import-mode=importlib`)
 - `uv run pytest tests/unit/test_rational.py::test_str` — run a single test
-- `uv run ruff check` — lint; currently passes. There is no `[tool.ruff]` section in the repo, so the enabled rules come from outside it. No formatter or type checker is configured.
+- `uv run ruff check` — lint; currently passes. There is no `[tool.ruff]` section in the repo, so the enabled rules come from outside it. `uv run ruff format` is the formatter (default settings; `--check` to verify); no type checker is configured.
 - There is no console script anymore: `main()` was removed from `src/rational/__init__.py` and `[project.scripts]` from `pyproject.toml`.
 
 ## Architecture
@@ -30,6 +30,6 @@ Small learning project: a `Rational` (fraction) class in Python, managed with `u
 
 ## Conventions
 
-- Code is type-annotated; only `__rtruediv__` still lacks a return type. Keep `uv run ruff check` clean.
+- Code is type-annotated; only `__rtruediv__` still lacks a return type. Keep `uv run ruff check` clean and the code formatted with `uv run ruff format`.
 - The user speaks French; reply in French.
 - Keep `claude_history.md` (repo root) updated: after each modification, commit or file creation in the repo, append a dated line at the bottom.
