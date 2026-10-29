@@ -604,6 +604,38 @@ def test_abs_multiplicatif_et_inegalite_triangulaire(a, b):
     assert abs(a + b) <= abs(a) + abs(b)
 
 
+@pytest.mark.parametrize(
+    "a, attendu",
+    [
+        (R(0), False),
+        (R(0, 5), False),
+        (R(0, -5), False),
+        (R(1), True),
+        (R(-1), True),
+        (R(1, 2), True),
+        (R(-1, 2), True),
+        (R(1, 10**20), True),
+    ],
+)
+def test_bool(a, attendu):
+    assert bool(a) is attendu
+
+
+def test_bool_dans_conditions():
+    assert not R(0)
+    assert R(1, 2)
+    assert (R(1, 2) and "vrai") == "vrai"
+    assert (R(0) or "defaut") == "defaut"
+    assert [r for r in (R(0), R(1, 2), R(-1), R(0, 3)) if r] == [R(1, 2), R(-1)]
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(5)])
+def test_bool_coherent_avec_neg_et_abs(a):
+    assert bool(-a) is bool(a)
+    assert bool(abs(a)) is bool(a)
+    assert bool(a - a) is False
+
+
 # --- Types non supportés --------------------------------------------------
 
 
