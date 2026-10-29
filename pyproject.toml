@@ -18,6 +18,10 @@ testpaths = ["tests"]
 pythonpath = ["src"] # evite les erreurs d’import
 addopts = "-ra --strict-markers --import-mode=importlib"
 
+[tool.pyright]
+include = ["src"]
+typeCheckingMode = "strict"
+
 [dependency-groups]
 dev = [
     "hypothesis>=6.170.13",
