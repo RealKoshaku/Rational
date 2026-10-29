@@ -1,5 +1,7 @@
 # Rational
 
+[![CI](https://github.com/RealKoshaku/Rational/actions/workflows/ci.yml/badge.svg)](https://github.com/RealKoshaku/Rational/actions/workflows/ci.yml)
+
 A small learning project: an immutable `Rational` (fraction) class in Python, with exact arithmetic, comparisons and `int` interoperability.
 
 ## Requirements
