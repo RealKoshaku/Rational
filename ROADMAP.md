@@ -48,7 +48,7 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 
 ## 5. Pour aller plus loin
 
-- [ ] Réexporter `Rational` depuis `rational/__init__.py` (`from rational import Rational`)
+- [x] Réexporter `Rational` depuis `rational/__init__.py` (`from rational import Rational`)
 - [x] Rendre la classe immuable (`__slots__`, propriétés en lecture seule, ou `dataclass(frozen=True)`)
 - [ ] Comparer avec `fractions.Fraction` de la bibliothèque standard
 - [ ] Publier le paquet (build `uv_build`, puis `uv publish`)
