@@ -24,3 +24,4 @@
 - 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests de comparaisons avec `int` (`<`, `<=`, `>`, `>=`, int à gauche et à droite, `bool`, tri mixte).
 - 2026-10-29 — Commits et push des comparaisons avec `int` (rational.py, tests).
 - 2026-10-29 — Ajout de `__pow__` et de ses tests, cases `__pow__` et « Tests pour chaque nouvel opérateur » cochées dans `ROADMAP.md`; commits et push.
+- 2026-10-29 — Rédaction de `README.md` en anglais (installation, usage, opérations supportées, développement).
