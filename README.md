@@ -73,9 +73,10 @@ Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotIm
 uv run pytest                                            # run all tests
 uv run pytest tests/unit/test_rational.py::test_str      # run a single test
 uv run ruff check                                        # lint (currently passes with no errors)
+uv run ruff format                                       # format the code (currently already formatted)
 ```
 
-Tests use `pytest` (with `@pytest.mark.parametrize`) and `hypothesis` for property-based checks. `ruff` is only used as a linter (the repository has no `[tool.ruff]` configuration yet); no formatter or type checker is configured. See [`ROADMAP.md`](ROADMAP.md) for planned work.
+Tests use `pytest` (with `@pytest.mark.parametrize`) and `hypothesis` for property-based checks. `ruff` is used both as a linter and as a formatter (the repository has no `[tool.ruff]` configuration yet, so default formatting applies); no type checker is configured. See [`ROADMAP.md`](ROADMAP.md) for planned work.
 
 ## Project layout
 
