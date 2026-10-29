@@ -37,3 +37,4 @@
 - 2026-10-29 — `README.md` et `ROADMAP.md` : `pytest-cov` documenté (commande de couverture) et coché.
 - 2026-10-29 — `CLAUDE.md` : `pytest-cov` documenté; commits et push (avec `pyproject.toml` et `uv.lock`).
 - 2026-10-29 — `README.md` : ajout du badge CI.
+- 2026-10-29 — `README.md` et `CLAUDE.md` : version de Python (`>=3.14`).

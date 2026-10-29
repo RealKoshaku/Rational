@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Small learning project: a `Rational` (fraction) class in Python, managed with `uv` (build backend `uv_build`, src layout). Pinned to Python 3.14 via `.python-version` (`pyproject.toml` requires `>=3.14.7`). Runtime dependencies are empty; `pytest`, `pytest-cov`, `hypothesis`, `ruff` and `pyright` live in the `dev` dependency group (installed by `uv sync`). `ROADMAP.md` holds the checkbox roadmap — tick items there as they are done.
+Small learning project: a `Rational` (fraction) class in Python, managed with `uv` (build backend `uv_build`, src layout). Pinned to Python 3.14 via `.python-version` (`pyproject.toml` requires `>=3.14`). Runtime dependencies are empty; `pytest`, `pytest-cov`, `hypothesis`, `ruff` and `pyright` live in the `dev` dependency group (installed by `uv sync`). `ROADMAP.md` holds the checkbox roadmap — tick items there as they are done.
 
 ## Commands
 

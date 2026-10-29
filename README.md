@@ -6,7 +6,7 @@ A small learning project: an immutable `Rational` (fraction) class in Python, wi
 
 ## Requirements
 
-- Python 3.14 (see `.python-version`; `pyproject.toml` requires `>=3.14.7`)
+- Python 3.14 (see `.python-version`; `pyproject.toml` requires `>=3.14`)
 - [uv](https://docs.astral.sh/uv/)
 
 ## Installation
