@@ -1,0 +1,86 @@
+# Rational
+
+A small learning project: an immutable `Rational` (fraction) class in Python, with exact arithmetic, comparisons and `int` interoperability.
+
+## Requirements
+
+- Python 3.14 (see `.python-version`; `pyproject.toml` requires `>=3.14.7`)
+- [uv](https://docs.astral.sh/uv/)
+
+## Installation
+
+```sh
+git clone git@github.com:RealKoshaku/Rational.git
+cd Rational
+uv sync
+```
+
+## Usage
+
+```python
+from rational.rational import Rational
+
+a = Rational(1, 2)
+b = Rational(1, 3)
+
+a + b             # Rational(5, 6)
+a * 3             # Rational(3, 2)
+1 - a             # Rational(1, 2)
+2 / Rational(3, 4)  # Rational(8, 3)
+Rational(2, 3) ** -2  # Rational(9, 4)
+
+str(Rational(2, 4))   # '1 / 2'
+```
+
+`Rational` is not re-exported from the `rational` package yet: import it from `rational.rational`.
+
+### Normalization
+
+Instances are always stored in lowest terms, with a positive denominator and the sign carried by the numerator:
+
+```python
+Rational(2, 4)     # Rational(1, 2)
+Rational(1, -2)    # Rational(-1, 2)
+Rational(0, 5)     # Rational(0, 1)
+Rational(3)        # Rational(3, 1)  (the denominator defaults to 1)
+```
+
+- A zero denominator raises `ZeroDivisionError`.
+- `num` and `den` must be `int`; anything else (including `bool`) raises `TypeError`.
+- Instances are immutable (`@dataclass(frozen=True, slots=True)`).
+
+### Supported operations
+
+| Category | Operators |
+| --- | --- |
+| Arithmetic | `+`, `-`, `*`, `/` between `Rational`s, and with an `int` on either side |
+| Power | `**` with an `int` exponent (negative included; `0 ** -n` raises `ZeroDivisionError`) |
+| Unary | `-x`, `abs(x)`, `bool(x)` (false only for zero) |
+| Comparison | `==`, `!=`, `<`, `<=`, `>`, `>=` between `Rational`s, and with an `int` on either side |
+| Hashing | `hash(Rational(n))` equals `hash(n)`, so equal values behave the same in sets and dict keys |
+
+```python
+Rational(4, 2) == 2          # True
+Rational(1, 2) < 1           # True
+sorted([Rational(1, 2), 0, Rational(-1, 3)])  # [Rational(-1, 3), 0, Rational(1, 2)]
+```
+
+Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotImplemented`, so Python raises `TypeError`. Division by a zero `Rational` or by `0` raises `ZeroDivisionError`.
+
+## Development
+
+```sh
+uv run pytest                                           # run all tests
+uv run pytest tests/unit/test_rational.py::test_eq_int  # run a single test
+```
+
+No linter or formatter is configured yet. See [`ROADMAP.md`](ROADMAP.md) for planned work.
+
+## Project layout
+
+```text
+src/rational/rational.py   the Rational class
+src/rational/__init__.py   console-script entry point (still a stub)
+tests/unit/                pytest test suite
+ROADMAP.md                 checklist of planned and finished work
+```
