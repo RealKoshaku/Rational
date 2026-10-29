@@ -11,3 +11,4 @@
 - 2026-10-28 — Commit et push de la correction des tests (comparaison de tuples) et du saut de ligne final de `pyproject.toml`.
 - 2026-10-28 — Création de `ROADMAP.md` (roadmap cochable du projet).
 - 2026-10-28 — Commit et push de `ROADMAP.md`.
+- 2026-10-29 — Mise à jour de `CLAUDE.md` via `/init` (dataclass figée, `__hash__`/`__eq__`, support des `int`, tests, ROADMAP).

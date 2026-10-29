@@ -37,6 +37,36 @@ class Rational:
     def __lt__(self, other: object):
         if not isinstance(other, Rational):
             return NotImplemented
+        return self.num * other.den < self.den * other.num
+
+    def __le__(self, other: object):
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return self.num * other.den <= self.den * other.num
+
+    def __gt__(self, other: object):
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return self.num * other.den > self.den * other.num
+
+    def __ge__(self, other: object):
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return self.num * other.den >= self.den * other.num
+
+    def __add__(self, other: object) -> Rational:
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
+
+    def __sub__(self, other: object) -> Rational:
+        if not isinstance(other, Rational):
+            return NotImplemented
+        return Rational(self.num * other.den - self.den * other.num, self.den * other.den)
+
+    def __mul__(self, other) -> Rational:
+        if not isinstance(other, Rational):
+            return NotImplemented
         return Rational(self.num * other.num, self.den * other.den)
 
     def __truediv__(self, other) -> Rational:
@@ -47,9 +77,6 @@ class Rational:
             raise ZeroDivisionError(f"cannot divide by {repr(other)}")
 
         return Rational(self.num * other.den, self.den * other.num)
-
-    def __neg__(self):
-        return Rational() - self
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
