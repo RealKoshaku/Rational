@@ -1,7 +1,7 @@
 [project]
 name = "rational"
 version = "0.1.0"
-description = "Add your description here"
+description = "An immutable rational class in python with exact arithmetic operations"
 readme = "README.md"
 authors = [
     { name = "Adahy Plas", email = "plasadahy0@gmail.com" }
