@@ -7,9 +7,7 @@ authors = [
     { name = "Adahy Plas", email = "plasadahy0@gmail.com" }
 ]
 requires-python = ">=3.14.7"
-dependencies = [
-    "pytest==9.2.0",
-]
+dependencies = []
 
 [project.scripts]
 rational = "rational:main"
@@ -26,4 +24,5 @@ addopts = "-ra --strict-markers --import-mode=importlib"
 [dependency-groups]
 dev = [
     "hypothesis>=6.170.13",
+    "pytest>=9.2.0",
 ]
