@@ -33,7 +33,7 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 - [x] Accepter les `int` dans les opérateurs (`Rational(1, 2) + 1`)
 - [x] Opérateurs inverses `__radd__`, `__rsub__`, `__rmul__`, `__rtruediv__` (`1 + Rational(1, 2)`)
 - [x] `__eq__` avec un `int` (`Rational(2, 1) == 2`)
-- [ ] `__float__` et `__int__`
+- [x] `__float__` et `__int__`
 - [ ] Construction depuis une chaîne (`"3/4"`) et/ou un `float`
 - [x] Mettre à jour les tests : les cas « autre type » avec `int` ne doivent plus lever `TypeError`
 
@@ -43,8 +43,8 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 - [x] Ajouter un linter/formatter (ex. `ruff`) et documenter la commande dans `CLAUDE.md`
 - [x] Ajouter un vérificateur de types (ex. `mypy` ou `pyright`)
 - [x] Mesurer la couverture de tests (`pytest-cov`)
-- [ ] Tests par propriétés avec `hypothesis` (associativité, distributivité, `a - a == 0`)
-- [ ] Intégration continue (GitHub Actions : `uv sync` puis `uv run pytest`)
+- [x] Tests par propriétés avec `hypothesis` (associativité, distributivité, `a - a == 0`)
+- [x] Intégration continue (GitHub Actions : `uv sync` puis `uv run pytest`)
 
 ## 5. Pour aller plus loin
 
