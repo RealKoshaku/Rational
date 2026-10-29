@@ -529,6 +529,48 @@ def test_operateurs_augmentes_int_gauche():
     assert paire(n) == (6, 1)
 
 
+# --- Négation, valeur absolue, booléen ------------------------------------
+
+
+@pytest.mark.parametrize(
+    "a, attendu",
+    [
+        (R(1, 2), (-1, 2)),
+        (R(-1, 2), (1, 2)),
+        (R(0), (0, 1)),
+        (R(3), (-3, 1)),
+        (R(-3), (3, 1)),
+        (R(2, -4), (1, 2)),
+        (R(-6, -4), (-3, 2)),
+        (R(10**20, 3), (-(10**20), 3)),
+    ],
+)
+def test_neg(a, attendu):
+    assert paire(-a) == attendu
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0), R(5)])
+def test_neg_proprietes(a):
+    assert -(-a) == a
+    assert a + (-a) == R(0)
+    assert a - a == a + (-a)
+    assert -a == R(0) - a
+    assert -a == a * -1
+    assert -a == -1 * a
+
+
+def test_neg_zero_reste_normalise():
+    assert paire(-R(0)) == (0, 1)
+    assert hash(-R(0)) == hash(R(0)) == hash(0)
+
+
+def test_neg_retourne_nouvelle_instance():
+    a = R(1, 2)
+    b = -a
+    assert b is not a
+    assert paire(a) == (1, 2)
+
+
 # --- Types non supportés --------------------------------------------------
 
 
