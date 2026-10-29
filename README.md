@@ -51,6 +51,20 @@ Rational(3)  # Rational(3, 1)  (the denominator defaults to 1)
 - `num` and `den` must be `int`; anything else (including `bool`) raises `TypeError`.
 - Instances are immutable (`@dataclass(frozen=True, slots=True)`).
 
+### Building from a float
+
+`Rational.from_float(x)` converts a `float` to the exact fraction it stores (via `float.as_integer_ratio()`), already in lowest terms:
+
+```python
+Rational.from_float(0.5)  # Rational(1, 2)
+Rational.from_float(-3.125)  # Rational(-25, 8)
+Rational.from_float(2.0)  # Rational(2, 1)
+Rational.from_float(0.1)  # Rational(3602879701896397, 36028797018963968)
+```
+
+- The result is the exact binary value of the float, not the decimal you typed: `Rational.from_float(0.1) != Rational(1, 10)`.
+- `inf` and `-inf` raise `OverflowError`; `nan` raises `ValueError`.
+
 ### Supported operations
 
 | Category | Operators |
