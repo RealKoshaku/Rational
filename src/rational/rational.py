@@ -22,7 +22,7 @@ class Rational:
         object.__setattr__(self, "den", sign_den * den // g)
 
     @classmethod
-    def from_float(cls, x: float):
+    def from_float(cls, x: float) -> Rational:
         (num, den) = x.as_integer_ratio()
         return cls(num, den)
 
