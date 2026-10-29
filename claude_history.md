@@ -43,3 +43,5 @@
 2026-10-29 — Mise à jour de `CLAUDE.md` (`from_float` : architecture et tests).
 2026-10-29 — Ajout dans `tests/unit/test_rational.py` des tests de `Rational.__float__` (section « Conversion en float » + propriété hypothesis).
 2026-10-29 — Commit et push de rational.py (espaces), des tests de `__float__` et de l'historique.
+2026-10-29 — Ajout dans `tests/unit/test_rational.py` des tests de `Rational.__int__` (section « Conversion en int » + propriété hypothesis) ; `ruff format` a retiré une ligne vide en trop dans `rational.py`.
+2026-10-29 — Coche dans `ROADMAP.md` de `__float__`/`__int__`, de l'intégration continue et des tests hypothesis ; commit et push.
