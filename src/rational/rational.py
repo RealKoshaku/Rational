@@ -35,25 +35,41 @@ class Rational:
             return (self.num, self.den) == (value, 1)
         return NotImplemented
 
-    def __lt__(self, other: object):
-        if not isinstance(other, Rational):
+    def __lt__(self, other: object) -> bool:
+        if isinstance(other, Rational):
+            return self.num * other.den < self.den * other.num
+        if isinstance(other, bool):
             return NotImplemented
-        return self.num * other.den < self.den * other.num
+        if isinstance(other, int):
+            return self.num < self.den * other
+        return NotImplemented
 
-    def __le__(self, other: object):
-        if not isinstance(other, Rational):
+    def __le__(self, other: object) -> bool:
+        if isinstance(other, Rational):
+            return self.num * other.den <= self.den * other.num
+        if isinstance(other, bool):
             return NotImplemented
-        return self.num * other.den <= self.den * other.num
+        if isinstance(other, int):
+            return self.num <= self.den * other
+        return NotImplemented
 
-    def __gt__(self, other: object):
-        if not isinstance(other, Rational):
+    def __gt__(self, other: object) -> bool:
+        if isinstance(other, Rational):
+            return self.num * other.den > self.den * other.num
+        if isinstance(other, bool):
             return NotImplemented
-        return self.num * other.den > self.den * other.num
+        if isinstance(other, int):
+            return self.num > self.den * other
+        return NotImplemented
 
-    def __ge__(self, other: object):
-        if not isinstance(other, Rational):
+    def __ge__(self, other: object) -> bool:
+        if isinstance(other, Rational):
+            return self.num * other.den >= self.den * other.num
+        if isinstance(other, bool):
             return NotImplemented
-        return self.num * other.den >= self.den * other.num
+        if isinstance(other, int):
+            return self.num >= self.den * other
+        return NotImplemented
 
     def __add__(self, other: object) -> Rational:
         if isinstance(other, bool):
