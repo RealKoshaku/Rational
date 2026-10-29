@@ -15,3 +15,5 @@
 - 2026-10-29 — Création de `tests/unit/test_rational_refonte.py` (nouvelle version des tests, basée sur `test_rational.py`).
 - 2026-10-29 — Mise à jour de `CLAUDE.md` via `/init` (int dans `*` et `/`, plus de `__neg__`, test_rational_refonte.py).
 - 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests des opérations avec `int` (+, -, *, /, division par 0, refus des `bool`, propriétés).
+- 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests des opérateurs inverses (`__radd__`, `__rsub__`, `__rmul__`, `__rtruediv__`) : valeurs, division par zéro, `bool`/autres types, `NotImplemented`, opérateurs augmentés.
+- 2026-10-29 — Commits (annotations, opérateurs inverses, tests) et push.
