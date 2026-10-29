@@ -4,13 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Small learning project: a `Rational` (fraction) class in Python, managed with `uv` (build backend `uv_build`, src layout). Pinned to Python 3.14 via `.python-version` (`pyproject.toml` requires `>=3.14.7`). Runtime dependencies are empty; `pytest`, `hypothesis`, `ruff` and `pyright` live in the `dev` dependency group (installed by `uv sync`). `ROADMAP.md` holds the checkbox roadmap — tick items there as they are done.
+Small learning project: a `Rational` (fraction) class in Python, managed with `uv` (build backend `uv_build`, src layout). Pinned to Python 3.14 via `.python-version` (`pyproject.toml` requires `>=3.14.7`). Runtime dependencies are empty; `pytest`, `pytest-cov`, `hypothesis`, `ruff` and `pyright` live in the `dev` dependency group (installed by `uv sync`). `ROADMAP.md` holds the checkbox roadmap — tick items there as they are done.
 
 ## Commands
 
 - `uv sync` — create/refresh `.venv`
 - `uv run pytest` — run all tests (config in `[tool.pytest.ini_options]`: `testpaths=["tests"]`, `pythonpath=["src"]`, `--import-mode=importlib`)
 - `uv run pytest tests/unit/test_rational.py::test_str` — run a single test
+- `uv run pytest --cov=rational --cov-report=term-missing` — tests with coverage (currently 100%)
 - `uv run ruff check` — lint; currently passes. There is no `[tool.ruff]` section in the repo, so the enabled rules come from outside it. `uv run ruff format` is the formatter (default settings; `--check` to verify); `uv run pyright` type-checks `src/` only, in `strict` mode (`[tool.pyright]`; tests are excluded) and currently passes.
 - There is no console script anymore: `main()` was removed from `src/rational/__init__.py` and `[project.scripts]` from `pyproject.toml`.
 
