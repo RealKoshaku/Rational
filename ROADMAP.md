@@ -25,8 +25,8 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 - [x] `__bool__` (faux pour zéro)
 - [x] `__hash__` cohérent avec `__eq__` (aujourd'hui la classe n'est pas hashable)
 - [x] Comparaisons `__lt__`, `__le__`, `__gt__`, `__ge__` (ou `functools.total_ordering`)
-- [ ] `__pow__` avec exposant entier (négatif inclus)
-- [ ] Tests pour chaque nouvel opérateur
+- [x] `__pow__` avec exposant entier (négatif inclus)
+- [x] Tests pour chaque nouvel opérateur
 
 ## 3. Interopérabilité
 
