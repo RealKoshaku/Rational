@@ -122,6 +122,9 @@ class Rational:
             raise ZeroDivisionError(f"Cannot divide by {repr(self)}")
         return Rational(other * self.den, self.num)
 
+    def __neg__(self) -> Rational:
+        return Rational(-self.num, self.den)
+
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
