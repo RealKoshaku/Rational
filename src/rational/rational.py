@@ -100,6 +100,29 @@ class Rational:
 
         return Rational(self.num * other.den, self.den * other.num)
 
+    def __radd__(self, other: object) -> Rational:
+        if isinstance(other, bool) or not isinstance(other, int):
+            return NotImplemented
+        return self + other
+
+    def __rsub__(self, other: object) -> Rational:
+        if isinstance(other, bool) or not isinstance(other, int):
+            return NotImplemented
+        return Rational(self.den * other - self.num, self.den)
+
+    def __rmul__(self, other: object) -> Rational:
+        if isinstance(other, bool) or not isinstance(other, int):
+            return NotImplemented
+        return self * other
+
+    def __rtruediv__(self, other: object):
+        if isinstance(other, bool) or not isinstance(other, int):
+            return NotImplemented
+        if self == Rational():
+            raise ZeroDivisionError(f"Cannot divide by {repr(self)}")
+        return Rational(other * self.den, self.num)
+
+
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
 
