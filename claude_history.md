@@ -17,3 +17,5 @@
 - 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests des opérations avec `int` (+, -, *, /, division par 0, refus des `bool`, propriétés).
 - 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests des opérateurs inverses (`__radd__`, `__rsub__`, `__rmul__`, `__rtruediv__`) : valeurs, division par zéro, `bool`/autres types, `NotImplemented`, opérateurs augmentés.
 - 2026-10-29 — Commits (annotations, opérateurs inverses, tests) et push.
+- 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests de `__neg__`, `__abs__` et `__bool__`.
+- 2026-10-29 — Commits et push des tests de `__neg__`, `__abs__` et `__bool__`.
