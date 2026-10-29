@@ -26,3 +26,5 @@
 - 2026-10-29 — Ajout de `__pow__` et de ses tests, cases `__pow__` et « Tests pour chaque nouvel opérateur » cochées dans `ROADMAP.md`; commits et push.
 - 2026-10-29 — Rédaction de `README.md` en anglais (installation, usage, opérations supportées, développement).
 - 2026-10-29 — Précision dans `README.md` : `==`/`!=` ne lèvent pas `TypeError` pour les types non supportés.
+- 2026-10-29 — `README.md` et `CLAUDE.md` : `Rational` est désormais réexporté depuis `rational/__init__.py`.
+- 2026-10-29 — `ROADMAP.md` : réexport de `Rational` coché; commits et push.
