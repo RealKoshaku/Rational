@@ -15,6 +15,8 @@ cd Rational
 uv sync
 ```
 
+`uv sync` also installs the `dev` dependency group (`pytest`, `hypothesis`, `ruff`).
+
 ## Usage
 
 ```python
@@ -68,17 +70,18 @@ Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotIm
 ## Development
 
 ```sh
-uv run pytest                                           # run all tests
-uv run pytest tests/unit/test_rational.py::test_eq_int  # run a single test
+uv run pytest                                            # run all tests
+uv run pytest tests/unit/test_rational.py::test_str      # run a single test
+uv run ruff check                                        # lint (currently passes with no errors)
 ```
 
-No linter or formatter is configured yet. See [`ROADMAP.md`](ROADMAP.md) for planned work.
+Tests use `pytest` (with `@pytest.mark.parametrize`) and `hypothesis` for property-based checks. `ruff` is only used as a linter (the repository has no `[tool.ruff]` configuration yet); no formatter or type checker is configured. See [`ROADMAP.md`](ROADMAP.md) for planned work.
 
 ## Project layout
 
 ```text
 src/rational/rational.py   the Rational class
-src/rational/__init__.py   re-exports Rational; console-script entry point (still a stub)
+src/rational/__init__.py   re-exports Rational
 tests/unit/                pytest test suite
 ROADMAP.md                 checklist of planned and finished work
 ```
