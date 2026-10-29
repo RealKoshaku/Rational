@@ -41,3 +41,5 @@
 - 2026-10-29 — Ajout dans `tests/unit/test_rational.py` des tests de `Rational.from_float` (valeurs exactes, flottants non représentables, normalisation, inf/nan, comparaison avec `fractions.Fraction`, hypothesis).
 2026-10-29 — Ajout dans `README.md` d'une section « Building from a float » documentant `Rational.from_float`.
 2026-10-29 — Mise à jour de `CLAUDE.md` (`from_float` : architecture et tests).
+2026-10-29 — Ajout dans `tests/unit/test_rational.py` des tests de `Rational.__float__` (section « Conversion en float » + propriété hypothesis).
+2026-10-29 — Commit et push de rational.py (espaces), des tests de `__float__` et de l'historique.
