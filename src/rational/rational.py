@@ -128,6 +128,8 @@ class Rational:
     def __abs__(self) -> Rational:
         return self if self >= Rational() else -self
 
+    def __bool__(self) -> bool:
+        return False if self == Rational() else True
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
