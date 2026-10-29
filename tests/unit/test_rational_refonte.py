@@ -268,6 +268,105 @@ def test_proprietes_algebriques(a, b):
         assert (a / b) * b == a
 
 
+# --- Arithmétique avec des int (Rational à gauche) --------------------------
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), 1, (3, 2)),
+        (R(1, 2), -1, (-1, 2)),
+        (R(1, 2), 0, (1, 2)),
+        (R(-3, 4), 2, (5, 4)),
+        (R(1, 2), -3, (-5, 2)),
+        (R(1, 2), 5, (11, 2)),
+        (R(1, 2), 2, (5, 2)),
+        (R(-1, 2), 1, (1, 2)),  # résultat réduit
+    ],
+)
+def test_add_int(a, n, attendu):
+    assert paire(a + n) == attendu
+    assert a + n == a + R(n)
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), 1, (-1, 2)),
+        (R(1, 2), -1, (3, 2)),
+        (R(1, 2), 0, (1, 2)),
+        (R(3, 4), 2, (-5, 4)),
+        (R(5, 2), 2, (1, 2)),
+        (R(1, 2), 3, (-5, 2)),
+    ],
+)
+def test_sub_int(a, n, attendu):
+    assert paire(a - n) == attendu
+    assert a - n == a - R(n)
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), 2, (1, 1)),
+        (R(1, 2), 3, (3, 2)),
+        (R(2, 3), 3, (2, 1)),
+        (R(2, 3), 6, (4, 1)),
+        (R(-1, 2), 3, (-3, 2)),
+        (R(1, 2), -4, (-2, 1)),
+        (R(3, 4), 0, (0, 1)),
+        (R(3, 4), 1, (3, 4)),
+        (R(4, 9), 3, (4, 3)),  # simplification croisée
+    ],
+)
+def test_mul_int(a, n, attendu):
+    assert paire(a * n) == attendu
+    assert a * n == a * R(n)
+
+
+@pytest.mark.parametrize(
+    "a, n, attendu",
+    [
+        (R(1, 2), 2, (1, 4)),
+        (R(1, 2), -2, (-1, 4)),
+        (R(-1, 2), -2, (1, 4)),
+        (R(3, 4), 1, (3, 4)),
+        (R(4, 3), 2, (2, 3)),  # résultat réduit
+        (R(0), 5, (0, 1)),
+        (R(3, 4), 3, (1, 4)),
+    ],
+)
+def test_truediv_int(a, n, attendu):
+    assert paire(a / n) == attendu
+    assert a / n == a / R(n)
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(0), R(-3, 4)])
+def test_truediv_par_int_zero(a):
+    with pytest.raises(ZeroDivisionError):
+        a / 0
+
+
+@pytest.mark.parametrize(
+    "op",
+    [operator.add, operator.sub, operator.mul, operator.truediv],
+)
+@pytest.mark.parametrize("autre", [True, False])
+def test_operateur_bool_refuse(op, autre):
+    with pytest.raises(TypeError):
+        op(R(1, 2), autre)
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0)])
+@pytest.mark.parametrize("n", [-3, 0, 2])
+def test_proprietes_algebriques_int(a, n):
+    assert (a + n) - n == a
+    assert (a - n) + n == a
+    if n != 0:
+        assert (a * n) / n == a
+        assert (a / n) * n == a
+
+
 # --- Types non supportés --------------------------------------------------
 
 

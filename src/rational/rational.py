@@ -1,3 +1,4 @@
+from ast import Raise
 from math import gcd
 from dataclasses import dataclass
 
@@ -55,26 +56,47 @@ class Rational:
         return self.num * other.den >= self.den * other.num
 
     def __add__(self, other: object) -> Rational:
+        if isinstance(other, bool):
+            return NotImplemented
+        if isinstance(other, int):
+            return Rational(self.num + self.den * other, self.den)
         if not isinstance(other, Rational):
             return NotImplemented
+
         return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
 
     def __sub__(self, other: object) -> Rational:
+        if isinstance(other, bool):
+            return NotImplemented
+        if isinstance(other, int):
+            return Rational(self.num - self.den * other, self.den)
         if not isinstance(other, Rational):
             return NotImplemented
+
         return Rational(self.num * other.den - self.den * other.num, self.den * other.den)
 
     def __mul__(self, other) -> Rational:
+        if isinstance(other, bool):
+            return NotImplemented
+        if isinstance(other, int):
+            return Rational(self.num * other, self.den)
         if not isinstance(other, Rational):
             return NotImplemented
+
         return Rational(self.num * other.num, self.den * other.den)
 
     def __truediv__(self, other) -> Rational:
+        if isinstance(other, bool):
+            return NotImplemented
+        if isinstance(other, int):
+            if other == 0:
+                raise ZeroDivisionError("Cannot divide by zero.")
+            return Rational(self.num, self.den * other)
         if not isinstance(other, Rational):
             return NotImplemented
 
         if other == Rational():
-            raise ZeroDivisionError(f"cannot divide by {repr(other)}")
+            raise ZeroDivisionError(f"Cannot divide by {repr(other)}")
 
         return Rational(self.num * other.den, self.den * other.num)
 

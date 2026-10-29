@@ -23,8 +23,8 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 
 - [ ] `__neg__` et `__abs__`
 - [ ] `__bool__` (faux pour zéro)
-- [ ] `__hash__` cohérent avec `__eq__` (aujourd'hui la classe n'est pas hashable)
-- [ ] Comparaisons `__lt__`, `__le__`, `__gt__`, `__ge__` (ou `functools.total_ordering`)
+- [x] `__hash__` cohérent avec `__eq__` (aujourd'hui la classe n'est pas hashable)
+- [x] Comparaisons `__lt__`, `__le__`, `__gt__`, `__ge__` (ou `functools.total_ordering`)
 - [ ] `__pow__` avec exposant entier (négatif inclus)
 - [ ] Tests pour chaque nouvel opérateur
 

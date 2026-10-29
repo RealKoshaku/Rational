@@ -13,3 +13,5 @@
 - 2026-10-28 — Commit et push de `ROADMAP.md`.
 - 2026-10-29 — Mise à jour de `CLAUDE.md` via `/init` (dataclass figée, `__hash__`/`__eq__`, support des `int`, tests, ROADMAP).
 - 2026-10-29 — Création de `tests/unit/test_rational_refonte.py` (nouvelle version des tests, basée sur `test_rational.py`).
+- 2026-10-29 — Mise à jour de `CLAUDE.md` via `/init` (int dans `*` et `/`, plus de `__neg__`, test_rational_refonte.py).
+- 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests des opérations avec `int` (+, -, *, /, division par 0, refus des `bool`, propriétés).
