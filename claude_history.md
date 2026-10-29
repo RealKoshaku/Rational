@@ -19,3 +19,4 @@
 - 2026-10-29 — Commits (annotations, opérateurs inverses, tests) et push.
 - 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests de `__neg__`, `__abs__` et `__bool__`.
 - 2026-10-29 — Commits et push des tests de `__neg__`, `__abs__` et `__bool__`.
+- 2026-10-29 — Commits et push de `__neg__`, `__abs__`, `__bool__` (rational.py) et de `ROADMAP.md` (cases int cochées).
