@@ -1,3 +1,4 @@
-from .rational import Rational
-def main() -> None:
-    print("Hello from rational!")
+from .rational import Rational as Rational
+
+
+
