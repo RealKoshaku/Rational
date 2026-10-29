@@ -75,7 +75,7 @@ class Rational:
 
         return Rational(self.num * other.den - self.den * other.num, self.den * other.den)
 
-    def __mul__(self, other) -> Rational:
+    def __mul__(self, other: object) -> Rational:
         if isinstance(other, bool):
             return NotImplemented
         if isinstance(other, int):
@@ -85,7 +85,7 @@ class Rational:
 
         return Rational(self.num * other.num, self.den * other.den)
 
-    def __truediv__(self, other) -> Rational:
+    def __truediv__(self, other: object) -> Rational:
         if isinstance(other, bool):
             return NotImplemented
         if isinstance(other, int):
