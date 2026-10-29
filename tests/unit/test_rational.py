@@ -1,5 +1,6 @@
 import math
 import operator
+from fractions import Fraction
 
 import pytest
 from hypothesis import given
@@ -875,6 +876,116 @@ def test_bool_coherent_avec_neg_et_abs(a):
     assert bool(-a) is bool(a)
     assert bool(abs(a)) is bool(a)
     assert bool(a - a) is False
+
+
+# --- Construction depuis un float -----------------------------------------
+
+
+def fraction(r: Rational) -> Fraction:
+    """Équivalent exact de la bibliothèque standard, pour comparer."""
+    return Fraction(r.num, r.den)
+
+
+@pytest.mark.parametrize(
+    "x, attendu",
+    [
+        (0.0, (0, 1)),
+        (-0.0, (0, 1)),
+        (1.0, (1, 1)),
+        (-1.0, (-1, 1)),
+        (0.5, (1, 2)),
+        (-0.5, (-1, 2)),
+        (0.25, (1, 4)),
+        (0.75, (3, 4)),
+        (2.5, (5, 2)),
+        (-3.125, (-25, 8)),
+        (1e10, (10**10, 1)),
+        (2.0**-10, (1, 1024)),
+        (2.0**60, (2**60, 1)),
+    ],
+)
+def test_from_float_exact(x, attendu):
+    assert paire(Rational.from_float(x)) == attendu
+
+
+@pytest.mark.parametrize(
+    "x, attendu",
+    [
+        # un float non représentable exactement garde sa valeur binaire réelle
+        (0.1, (3602879701896397, 36028797018963968)),
+        (0.2, (3602879701896397, 18014398509481984)),
+        (1 / 3, (6004799503160661, 18014398509481984)),
+    ],
+)
+def test_from_float_valeur_binaire_exacte(x, attendu):
+    assert paire(Rational.from_float(x)) == attendu
+
+
+def test_from_float_n_est_pas_la_decimale_ecrite():
+    assert Rational.from_float(0.1) != Rational(1, 10)
+    assert Rational.from_float(0.1) + Rational.from_float(0.2) != Rational.from_float(
+        0.3
+    )
+
+
+@pytest.mark.parametrize("x", [0.0, 0.5, -0.5, 0.1, 1 / 3, 123456.789, -1e-300, 1e300])
+def test_from_float_aller_retour(x):
+    r = Rational.from_float(x)
+    assert r.num / r.den == x
+    assert float(fraction(r)) == x
+    assert fraction(r) == Fraction(x)
+
+
+@pytest.mark.parametrize("x", [0.5, -0.5, 0.1, 3.75, -1e-5, 1e15])
+def test_from_float_normalise(x):
+    r = Rational.from_float(x)
+    assert r.den > 0
+    assert math.gcd(r.num, r.den) == 1
+
+
+@pytest.mark.parametrize("x", [2.0, -7.0, 0.0, 1e10])
+def test_from_float_entier_egal_a_int(x):
+    r = Rational.from_float(x)
+    assert r.den == 1
+    assert r == int(x)
+    assert hash(r) == hash(int(x))
+
+
+@pytest.mark.parametrize("x, y", [(0.5, 0.25), (-0.5, 0.75), (0.1, 0.2)])
+def test_from_float_conserve_l_ordre_et_l_arithmetique(x, y):
+    a, b = Rational.from_float(x), Rational.from_float(y)
+    assert (a < b) is (x < y)
+    assert (a > b) is (x > y)
+    assert fraction(a + b) == Fraction(x) + Fraction(y)
+    assert fraction(a * b) == Fraction(x) * Fraction(y)
+
+
+def test_from_float_retourne_un_rational():
+    assert isinstance(Rational.from_float(0.5), Rational)
+
+
+def test_from_float_appelable_depuis_une_instance():
+    assert Rational(1, 3).from_float(0.5) == Rational(1, 2)
+
+
+@pytest.mark.parametrize("x", [float("inf"), float("-inf")])
+def test_from_float_infini(x):
+    with pytest.raises(OverflowError):
+        Rational.from_float(x)
+
+
+def test_from_float_nan():
+    with pytest.raises(ValueError):
+        Rational.from_float(float("nan"))
+
+
+@given(st.floats(allow_nan=False, allow_infinity=False))
+def test_from_float_propriete_hypothesis(x):
+    r = Rational.from_float(x)
+    assert fraction(r) == Fraction(x)
+    assert r.num / r.den == x
+    assert r.den > 0
+    assert math.gcd(r.num, r.den) == 1
 
 
 # --- Types non supportés --------------------------------------------------
