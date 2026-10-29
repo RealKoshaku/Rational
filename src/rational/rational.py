@@ -9,7 +9,7 @@ class Rational:
 
     def __post_init__(self) -> None:
         for value in (self.num, self.den):
-            if isinstance(value, bool) or not isinstance(value, int): # pyright: ignore[reportUnnecessaryIsInstance]
+            if isinstance(value, bool) or not isinstance(value, int):  # pyright: ignore[reportUnnecessaryIsInstance]
                 raise TypeError(f"num and den must be int, not {type(value).__name__}")
         if self.den == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
