@@ -9,7 +9,7 @@ class Rational:
 
     def __post_init__(self) -> None:
         for value in (self.num, self.den):
-            if isinstance(value, bool) or not isinstance(value, int):
+            if isinstance(value, bool) or not isinstance(value, int): # pyright: ignore[reportUnnecessaryIsInstance]
                 raise TypeError(f"num and den must be int, not {type(value).__name__}")
         if self.den == 0:
             raise ZeroDivisionError("Cannot divide by zero.")
@@ -142,7 +142,7 @@ class Rational:
             raise ZeroDivisionError(f"Cannot divide by {self!r}")
         return Rational(other * self.den, self.num)
 
-    def __pow__(self, power: int) -> Rational:
+    def __pow__(self, power: object) -> Rational:
         if isinstance(power, bool) or not isinstance(power, int):
             return NotImplemented
         if power >= 0:
