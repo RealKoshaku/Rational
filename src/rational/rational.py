@@ -21,6 +21,11 @@ class Rational:
         object.__setattr__(self, "num", sign_den * num // g)
         object.__setattr__(self, "den", sign_den * den // g)
 
+    @classmethod
+    def from_float(cls, x: float):
+        (num, den) = x.as_integer_ratio()
+        return cls(num, den)
+
     def __hash__(self) -> int:
         if self.den == 1:
             return hash(self.num)
