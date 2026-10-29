@@ -187,6 +187,128 @@ def test_tri():
     assert sorted(valeurs) == [R(-2, 3), R(-1, 2), R(0), R(1, 3), R(1, 2)]
 
 
+# --- Comparaisons avec des int ------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "a, n",
+    [
+        (R(1, 2), 1),
+        (R(-1, 2), 0),
+        (R(-3, 2), -1),
+        (R(0), 1),
+        (R(-1, 100), 0),
+        (R(7, 2), 4),
+        (R(-7, 2), -3),
+        (R(10**20, 3), 10**20),
+        (R(-5), -4),
+    ],
+)
+def test_comparaisons_rational_inferieur_a_int(a, n):
+    # a < n, avec l'int à droite puis à gauche (opérateur réfléchi)
+    assert a < n
+    assert a <= n
+    assert not a > n
+    assert not a >= n
+    assert a != n
+    assert n > a
+    assert n >= a
+    assert not n < a
+    assert not n <= a
+    assert n != a
+
+
+@pytest.mark.parametrize(
+    "a, n",
+    [
+        (R(3, 2), 1),
+        (R(1, 100), 0),
+        (R(1, 2), -1),
+        (R(-1, 2), -1),
+        (R(9, 2), 4),
+        (R(-5, 2), -3),
+        (R(10**20 + 1, 3), 10**19),
+        (R(5), 4),
+    ],
+)
+def test_comparaisons_rational_superieur_a_int(a, n):
+    assert a > n
+    assert a >= n
+    assert not a < n
+    assert not a <= n
+    assert a != n
+    assert n < a
+    assert n <= a
+    assert not n > a
+    assert not n >= a
+    assert n != a
+
+
+@pytest.mark.parametrize(
+    "a, n",
+    [(R(2), 2), (R(0), 0), (R(-3), -3), (R(6, 3), 2), (R(0, -4), 0), (R(10**20), 10**20)],
+)
+def test_comparaisons_rational_egal_a_int(a, n):
+    assert a == n
+    assert n == a
+    assert a <= n
+    assert a >= n
+    assert n <= a
+    assert n >= a
+    assert not a < n
+    assert not a > n
+    assert not n < a
+    assert not n > a
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-1, 2), R(0), R(7, 3), R(-7, 3), R(4)])
+@pytest.mark.parametrize("n", [-3, -1, 0, 1, 2, 4])
+def test_trichotomie_int(a, n):
+    assert (a < n) + (a == n) + (a > n) == 1
+    assert (a < n) == (a < R(n))
+    assert (a <= n) == (a <= R(n))
+    assert (a > n) == (a > R(n))
+    assert (a >= n) == (a >= R(n))
+    assert (n < a) == (R(n) < a)
+    assert (n >= a) == (R(n) >= a)
+
+
+@pytest.mark.parametrize("a", [R(7, 2), R(-7, 2), R(1, 3), R(-1, 3)])
+def test_encadrement_par_entiers(a):
+    # floor(a) <= a < floor(a) + 1
+    plancher = a.num // a.den
+    assert plancher <= a < plancher + 1
+
+
+def test_tri_et_extremes_melanges():
+    valeurs = [R(1, 2), 0, R(-1, 2), 1, -1, R(3, 2)]
+    assert sorted(valeurs) == [-1, R(-1, 2), 0, R(1, 2), 1, R(3, 2)]
+    assert min(valeurs) == -1
+    assert max(valeurs) == R(3, 2)
+
+
+@pytest.mark.parametrize("op", [operator.lt, operator.le, operator.gt, operator.ge])
+@pytest.mark.parametrize("autre", [True, False])
+def test_comparaison_bool_refusee(op, autre):
+    with pytest.raises(TypeError):
+        op(R(1, 2), autre)
+    with pytest.raises(TypeError):
+        op(autre, R(1, 2))
+
+
+@pytest.mark.parametrize("op", [operator.lt, operator.le, operator.gt, operator.ge])
+@pytest.mark.parametrize("autre", AUTRES_TYPES)
+def test_comparaison_inverse_autre_type(op, autre):
+    with pytest.raises(TypeError):
+        op(autre, R(1, 2))
+
+
+@pytest.mark.parametrize("methode", ["__lt__", "__le__", "__gt__", "__ge__"])
+@pytest.mark.parametrize("autre", AUTRES_TYPES + [True, False])
+def test_methode_comparaison_retourne_not_implemented(methode, autre):
+    assert getattr(R(1, 2), methode)(autre) is NotImplemented
+
+
 # --- Arithmétique ---------------------------------------------------------
 
 
