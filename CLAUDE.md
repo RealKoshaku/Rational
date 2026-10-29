@@ -16,7 +16,7 @@ Small learning project: a `Rational` (fraction) class in Python, managed with `u
 
 ## Architecture
 
-- `src/rational/rational.py` holds the `Rational` class; `src/rational/__init__.py` is only the entry-point stub and does not re-export `Rational` (import it from `rational.rational`).
+- `src/rational/rational.py` holds the `Rational` class; `src/rational/__init__.py` re-exports `Rational` (`from rational import Rational` works) and also holds the `main()` entry-point stub.
 - `Rational` is a `@dataclass(frozen=True, slots=True)` with fields `num`/`den`. Normalization happens in `__post_init__` (reduced by `gcd`, positive denominator, sign in `num`) and writes back with `object.__setattr__` because the instance is frozen. Zero denominator raises `ZeroDivisionError`; non-`int` (and `bool`) fields should raise `TypeError`. Operators build results through the constructor so they stay normalized.
 - `__eq__` and `__hash__` are hand-written (not the dataclass ones): equality compares normalized `(num, den)` and also accepts `int` (but not `bool`); the hash of an integer-valued `Rational` equals `hash(int)` to stay consistent with that equality.
 - `__add__`/`__sub__`/`__mul__`/`__truediv__` accept `Rational` and `int` (not `bool`) and return `NotImplemented` for other types. Each computes its result directly and builds it through the constructor. No reflected operators (`__radd__`, …), `__neg__`, `__abs__`, `__bool__` or `__pow__` yet (see `ROADMAP.md`).
