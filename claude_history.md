@@ -30,3 +30,5 @@
 - 2026-10-29 — `ROADMAP.md` : réexport de `Rational` coché; commits et push.
 - 2026-10-29 — `README.md` : groupe de dépendances dev, commande `ruff check`, hypothesis, nom de test valide, `__init__.py` sans `main()`.
 - 2026-10-29 — `CLAUDE.md` mis à jour (dépendances dev, ruff, plus de script console, opérateurs/tests actuels); commits et push.
+- 2026-10-29 — `README.md` et `CLAUDE.md` : ajout de `uv run ruff format`.
+- 2026-10-29 — `ROADMAP.md` : linter/formatter coché; commits et push.
