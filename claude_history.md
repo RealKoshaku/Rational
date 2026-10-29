@@ -34,3 +34,5 @@
 - 2026-10-29 — `ROADMAP.md` : linter/formatter coché; commits et push.
 - 2026-10-29 — `README.md` : ajout de `pyright` (dépendance dev, commande, configuration strict sur `src/`).
 - 2026-10-29 — `CLAUDE.md` et `ROADMAP.md` : pyright documenté et coché; commits et push.
+- 2026-10-29 — `README.md` et `ROADMAP.md` : `pytest-cov` documenté (commande de couverture) et coché.
+- 2026-10-29 — `CLAUDE.md` : `pytest-cov` documenté; commits et push (avec `pyproject.toml` et `uv.lock`).
