@@ -38,3 +38,6 @@
 - 2026-10-29 — `CLAUDE.md` : `pytest-cov` documenté; commits et push (avec `pyproject.toml` et `uv.lock`).
 - 2026-10-29 — `README.md` : ajout du badge CI.
 - 2026-10-29 — `README.md` et `CLAUDE.md` : version de Python (`>=3.14`).
+- 2026-10-29 — Ajout dans `tests/unit/test_rational.py` des tests de `Rational.from_float` (valeurs exactes, flottants non représentables, normalisation, inf/nan, comparaison avec `fractions.Fraction`, hypothesis).
+2026-10-29 — Ajout dans `README.md` d'une section « Building from a float » documentant `Rational.from_float`.
+2026-10-29 — Mise à jour de `CLAUDE.md` (`from_float` : architecture et tests).
