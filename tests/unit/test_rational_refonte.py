@@ -367,6 +367,168 @@ def test_proprietes_algebriques_int(a, n):
         assert (a / n) * n == a
 
 
+# --- Opérateurs inverses (int à gauche) -----------------------------------
+
+
+@pytest.mark.parametrize(
+    "n, a, attendu",
+    [
+        (1, R(1, 2), (3, 2)),
+        (-1, R(1, 2), (-1, 2)),
+        (0, R(1, 2), (1, 2)),
+        (2, R(-3, 4), (5, 4)),
+        (1, R(-1, 2), (1, 2)),
+        (-3, R(1, 2), (-5, 2)),
+        (2, R(1, 2), (5, 2)),
+        (1, R(-1, 1), (0, 1)),  # résultat nul normalisé
+        (10**20, R(1, 3), (3 * 10**20 + 1, 3)),
+    ],
+)
+def test_radd(n, a, attendu):
+    assert paire(n + a) == attendu
+    assert n + a == R(n) + a
+    assert n + a == a + n  # commutativité
+
+
+@pytest.mark.parametrize(
+    "n, a, attendu",
+    [
+        (1, R(1, 2), (1, 2)),
+        (0, R(1, 2), (-1, 2)),
+        (-1, R(1, 2), (-3, 2)),
+        (2, R(-3, 4), (11, 4)),
+        (2, R(5, 2), (-1, 2)),
+        (1, R(1, 1), (0, 1)),
+        (3, R(0), (3, 1)),
+        (0, R(0), (0, 1)),
+        (1, R(2, 4), (1, 2)),
+    ],
+)
+def test_rsub(n, a, attendu):
+    assert paire(n - a) == attendu
+    assert n - a == R(n) - a
+    assert (n - a) + a == n
+
+
+@pytest.mark.parametrize(
+    "n, a, attendu",
+    [
+        (2, R(1, 2), (1, 1)),
+        (3, R(1, 2), (3, 2)),
+        (3, R(2, 3), (2, 1)),
+        (6, R(2, 3), (4, 1)),
+        (3, R(-1, 2), (-3, 2)),
+        (-4, R(1, 2), (-2, 1)),
+        (-4, R(-1, 2), (2, 1)),
+        (0, R(3, 4), (0, 1)),
+        (1, R(3, 4), (3, 4)),
+        (3, R(4, 9), (4, 3)),
+    ],
+)
+def test_rmul(n, a, attendu):
+    assert paire(n * a) == attendu
+    assert n * a == R(n) * a
+    assert n * a == a * n  # commutativité
+
+
+@pytest.mark.parametrize(
+    "n, a, attendu",
+    [
+        (1, R(1, 2), (2, 1)),
+        (1, R(2, 3), (3, 2)),
+        (2, R(1, 2), (4, 1)),
+        (2, R(-1, 2), (-4, 1)),
+        (-2, R(-1, 2), (4, 1)),
+        (-2, R(1, 2), (-4, 1)),
+        (0, R(3, 5), (0, 1)),
+        (3, R(3, 4), (4, 1)),
+        (4, R(6, 1), (2, 3)),  # résultat réduit
+        (1, R(-3, 1), (-1, 3)),  # signe porté par le numérateur
+        (5, R(1, 1), (5, 1)),
+    ],
+)
+def test_rtruediv(n, a, attendu):
+    assert paire(n / a) == attendu
+    assert n / a == R(n) / a
+
+
+@pytest.mark.parametrize("n", [-5, 0, 1, 7])
+def test_rtruediv_par_zero(n):
+    with pytest.raises(ZeroDivisionError):
+        n / R(0)
+
+
+@pytest.mark.parametrize("n", [-5, 0, 1, 7])
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(5, 1)])
+def test_inverses_coherents_avec_directs(n, a):
+    assert n + a == a + n
+    assert n * a == a * n
+    assert n - a == R(n) - a
+    assert (n - a) + a == n
+    assert (n - a) + (a - n) == 0
+
+
+@pytest.mark.parametrize("n", [-5, 1, 7])
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(5, 1)])
+def test_rtruediv_inverse_de_truediv(n, a):
+    assert (n / a) * a == n
+    assert n / a == R(n) / a
+    assert (n / a) * (a / n) == R(1)
+
+
+@pytest.mark.parametrize(
+    "op",
+    [operator.add, operator.sub, operator.mul, operator.truediv],
+)
+@pytest.mark.parametrize("autre", [True, False])
+def test_operateur_inverse_bool_refuse(op, autre):
+    with pytest.raises(TypeError):
+        op(autre, R(1, 2))
+
+
+@pytest.mark.parametrize(
+    "op",
+    [operator.add, operator.sub, operator.mul, operator.truediv],
+)
+@pytest.mark.parametrize("autre", AUTRES_TYPES)
+def test_operateur_inverse_autre_type(op, autre):
+    with pytest.raises(TypeError):
+        op(autre, R(1, 2))
+
+
+@pytest.mark.parametrize("methode", ["__radd__", "__rsub__", "__rmul__", "__rtruediv__"])
+@pytest.mark.parametrize("autre", AUTRES_TYPES + [True, False])
+def test_methode_inverse_retourne_not_implemented(methode, autre):
+    assert getattr(R(1, 2), methode)(autre) is NotImplemented
+
+
+def test_operateurs_augmentes_avec_int():
+    r = R(1, 2)
+    r += 1
+    assert paire(r) == (3, 2)
+    r -= 2
+    assert paire(r) == (-1, 2)
+    r *= -4
+    assert paire(r) == (2, 1)
+    r /= 4
+    assert paire(r) == (1, 2)
+
+
+def test_operateurs_augmentes_int_gauche():
+    n = 1
+    n += R(1, 2)
+    assert paire(n) == (3, 2)
+    n = 3
+    n -= R(1, 2)
+    assert paire(n) == (5, 2)
+    n = 3
+    n *= R(1, 2)
+    assert paire(n) == (3, 2)
+    n = 3
+    n /= R(1, 2)
+    assert paire(n) == (6, 1)
+
+
 # --- Types non supportés --------------------------------------------------
 
 
