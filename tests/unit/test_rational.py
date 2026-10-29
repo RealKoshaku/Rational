@@ -250,7 +250,14 @@ def test_comparaisons_rational_superieur_a_int(a, n):
 
 @pytest.mark.parametrize(
     "a, n",
-    [(R(2), 2), (R(0), 0), (R(-3), -3), (R(6, 3), 2), (R(0, -4), 0), (R(10**20), 10**20)],
+    [
+        (R(2), 2),
+        (R(0), 0),
+        (R(-3), -3),
+        (R(6, 3), 2),
+        (R(0, -4), 0),
+        (R(10**20), 10**20),
+    ],
 )
 def test_comparaisons_rational_egal_a_int(a, n):
     assert a == n
@@ -622,7 +629,9 @@ def test_operateur_inverse_autre_type(op, autre):
         op(autre, R(1, 2))
 
 
-@pytest.mark.parametrize("methode", ["__radd__", "__rsub__", "__rmul__", "__rtruediv__"])
+@pytest.mark.parametrize(
+    "methode", ["__radd__", "__rsub__", "__rmul__", "__rtruediv__"]
+)
 @pytest.mark.parametrize("autre", AUTRES_TYPES + [True, False])
 def test_methode_inverse_retourne_not_implemented(methode, autre):
     assert getattr(R(1, 2), methode)(autre) is NotImplemented
@@ -781,7 +790,7 @@ def test_neg(a, attendu):
 
 @pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0), R(5)])
 def test_neg_proprietes(a):
-    assert - (-a) == a  # noqa: B002
+    assert -(-a) == a  # noqa: B002
     assert a + (-a) == R(0)
     assert a - a == a + (-a)
     assert -a == R(0) - a
@@ -828,7 +837,9 @@ def test_abs_proprietes(a):
     assert (abs(a) == R(0)) is (a == R(0))
 
 
-@pytest.mark.parametrize("a, b", [(R(1, 2), R(-1, 3)), (R(-2, 3), R(-5, 7)), (R(0), R(3, 4))])
+@pytest.mark.parametrize(
+    "a, b", [(R(1, 2), R(-1, 3)), (R(-2, 3), R(-5, 7)), (R(0), R(3, 4))]
+)
 def test_abs_multiplicatif_et_inegalite_triangulaire(a, b):
     assert abs(a * b) == abs(a) * abs(b)
     assert abs(a + b) <= abs(a) + abs(b)
@@ -887,27 +898,33 @@ def test_operateur_autre_type(op, autre):
     with pytest.raises(TypeError):
         op(R(1, 2), autre)
 
+
 rationnels = st.builds(
     Rational,
     st.integers(),
     st.integers().filter(lambda d: d != 0),
 )
 
+
 @given(rationnels, rationnels)
 def test_add_commutatif(a, b):
     assert a + b == b + a
+
 
 @given(rationnels)
 def test_sub_same(a):
     assert a - a == 0
 
+
 @given(rationnels, rationnels)
 def test_mul_commutatif(a, b):
     assert a * b == b * a
 
+
 @given(rationnels, rationnels, rationnels)
 def test_distributivity(a, b, c):
-    assert a*(b+c) == a*b + a*c
+    assert a * (b + c) == a * b + a * c
+
 
 @given(rationnels, rationnels)
 def test_add_normalized(a, b):

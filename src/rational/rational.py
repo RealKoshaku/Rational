@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from math import gcd
 
 
-@dataclass(frozen=True,slots=True)
+@dataclass(frozen=True, slots=True)
 class Rational:
     num: int = 0
     den: int = 1
@@ -79,7 +79,9 @@ class Rational:
         if not isinstance(other, Rational):
             return NotImplemented
 
-        return Rational(self.num * other.den + self.den * other.num, self.den * other.den)
+        return Rational(
+            self.num * other.den + self.den * other.num, self.den * other.den
+        )
 
     def __sub__(self, other: object) -> Rational:
         if isinstance(other, bool):
@@ -89,7 +91,9 @@ class Rational:
         if not isinstance(other, Rational):
             return NotImplemented
 
-        return Rational(self.num * other.den - self.den * other.num, self.den * other.den)
+        return Rational(
+            self.num * other.den - self.den * other.num, self.den * other.den
+        )
 
     def __mul__(self, other: object) -> Rational:
         if isinstance(other, bool):

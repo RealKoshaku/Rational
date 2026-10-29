@@ -25,13 +25,13 @@ from rational import Rational
 a = Rational(1, 2)
 b = Rational(1, 3)
 
-a + b             # Rational(5, 6)
-a * 3             # Rational(3, 2)
-1 - a             # Rational(1, 2)
+a + b  # Rational(5, 6)
+a * 3  # Rational(3, 2)
+1 - a  # Rational(1, 2)
 2 / Rational(3, 4)  # Rational(8, 3)
 Rational(2, 3) ** -2  # Rational(9, 4)
 
-str(Rational(2, 4))   # '1 / 2'
+str(Rational(2, 4))  # '1 / 2'
 ```
 
 ### Normalization
@@ -39,10 +39,10 @@ str(Rational(2, 4))   # '1 / 2'
 Instances are always stored in lowest terms, with a positive denominator and the sign carried by the numerator:
 
 ```python
-Rational(2, 4)     # Rational(1, 2)
-Rational(1, -2)    # Rational(-1, 2)
-Rational(0, 5)     # Rational(0, 1)
-Rational(3)        # Rational(3, 1)  (the denominator defaults to 1)
+Rational(2, 4)  # Rational(1, 2)
+Rational(1, -2)  # Rational(-1, 2)
+Rational(0, 5)  # Rational(0, 1)
+Rational(3)  # Rational(3, 1)  (the denominator defaults to 1)
 ```
 
 - A zero denominator raises `ZeroDivisionError`.
@@ -60,8 +60,8 @@ Rational(3)        # Rational(3, 1)  (the denominator defaults to 1)
 | Hashing | `hash(Rational(n))` equals `hash(n)`, so equal values behave the same in sets and dict keys |
 
 ```python
-Rational(4, 2) == 2          # True
-Rational(1, 2) < 1           # True
+Rational(4, 2) == 2  # True
+Rational(1, 2) < 1  # True
 sorted([Rational(1, 2), 0, Rational(-1, 3)])  # [Rational(-1, 3), 0, Rational(1, 2)]
 ```
 
