@@ -41,7 +41,7 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 
 - [ ] Déplacer `pytest` dans un groupe de dépendances de développement
 - [x] Ajouter un linter/formatter (ex. `ruff`) et documenter la commande dans `CLAUDE.md`
-- [ ] Ajouter un vérificateur de types (ex. `mypy` ou `pyright`)
+- [x] Ajouter un vérificateur de types (ex. `mypy` ou `pyright`)
 - [ ] Mesurer la couverture de tests (`pytest-cov`)
 - [ ] Tests par propriétés avec `hypothesis` (associativité, distributivité, `a - a == 0`)
 - [ ] Intégration continue (GitHub Actions : `uv sync` puis `uv run pytest`)
