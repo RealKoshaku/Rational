@@ -571,6 +571,39 @@ def test_neg_retourne_nouvelle_instance():
     assert paire(a) == (1, 2)
 
 
+@pytest.mark.parametrize(
+    "a, attendu",
+    [
+        (R(1, 2), (1, 2)),
+        (R(-1, 2), (1, 2)),
+        (R(0), (0, 1)),
+        (R(7), (7, 1)),
+        (R(-7), (7, 1)),
+        (R(-4, 6), (2, 3)),
+        (R(4, -6), (2, 3)),
+        (R(-4, -6), (2, 3)),
+        (R(-(10**20), 3), (10**20, 3)),
+    ],
+)
+def test_abs(a, attendu):
+    assert paire(abs(a)) == attendu
+
+
+@pytest.mark.parametrize("a", [R(1, 2), R(-3, 4), R(0), R(-5), R(5)])
+def test_abs_proprietes(a):
+    assert abs(a) >= R(0)
+    assert abs(a) == abs(-a)
+    assert abs(abs(a)) == abs(a)
+    assert abs(a) in (a, -a)
+    assert (abs(a) == R(0)) is (a == R(0))
+
+
+@pytest.mark.parametrize("a, b", [(R(1, 2), R(-1, 3)), (R(-2, 3), R(-5, 7)), (R(0), R(3, 4))])
+def test_abs_multiplicatif_et_inegalite_triangulaire(a, b):
+    assert abs(a * b) == abs(a) * abs(b)
+    assert abs(a + b) <= abs(a) + abs(b)
+
+
 # --- Types non supportés --------------------------------------------------
 
 
