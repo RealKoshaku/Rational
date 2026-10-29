@@ -125,6 +125,9 @@ class Rational:
     def __neg__(self) -> Rational:
         return Rational(-self.num, self.den)
 
+    def __abs__(self) -> Rational:
+        return self if self >= Rational() else -self
+
 
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
