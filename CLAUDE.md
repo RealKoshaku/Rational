@@ -22,12 +22,13 @@ Small learning project: a `Rational` (fraction) class in Python, managed with `u
 - `__eq__` and `__hash__` are hand-written (not the dataclass ones): equality compares normalized `(num, den)` and also accepts `int` (but not `bool`); the hash of an integer-valued `Rational` equals `hash(int)` to stay consistent with that equality.
 - `__add__`/`__sub__`/`__mul__`/`__truediv__` and the comparisons (`<`, `<=`, `>`, `>=`) accept `Rational` and `int` (not `bool`) and return `NotImplemented` for other types, so Python raises `TypeError` (`==`/`!=` fall back to `False`/`True`). Results are built through the constructor.
 - Reflected operators `__radd__`/`__rsub__`/`__rmul__`/`__rtruediv__` accept `int` only (so `2 < Rational` works via the reflected comparison). `__pow__` takes an `int` exponent, negatives included (`Rational(0) ** -n` raises `ZeroDivisionError`); there is no `__rpow__`. Also `__neg__`, `__abs__` and `__bool__` (false only for zero).
+- `Rational.from_float(x)` is a classmethod built on `float.as_integer_ratio()`: it gives the exact binary value of the float (`from_float(0.1) != Rational(1, 10)`), `inf` raises `OverflowError` and `nan` raises `ValueError`. It does no type check (a `str` raises `AttributeError`).
 - `__truediv__`/`__rtruediv__` raise `ZeroDivisionError` explicitly for a zero divisor (`int` 0 or zero `Rational`).
 
 ## Tests
 
 - All tests live in `tests/unit/test_rational.py`, grouped by `# --- section ---` comments, and use `@pytest.mark.parametrize` with a French `attendu` (expected) parameter. Helpers: `R(num, den)` builds instances; `paire(r)` returns `(num, den)` — use it instead of `==` on results when you want to check normalization too; `AUTRES_TYPES = [0.5, "1/2", None]` lists unsupported operand types (`int` and `bool` are tested separately).
-- Covered: normalization, errors, `__str__`/`__repr__`, `==`/hash, comparisons and arithmetic with `Rational` and `int` on either side, reflected operators, `__pow__`, `__neg__`/`__abs__`/`__bool__`, and `NotImplemented`/`TypeError` for unsupported types. A final section uses `hypothesis` (`@given(rationnels, ...)`) for properties such as commutativity, distributivity and normalization.
+- Covered: normalization, errors, `__str__`/`__repr__`, `==`/hash, comparisons and arithmetic with `Rational` and `int` on either side, reflected operators, `__pow__`, `__neg__`/`__abs__`/`__bool__`, `from_float` (compared with `fractions.Fraction` through `Fraction(r.num, r.den)`, since `Rational == Fraction` is `False`), and `NotImplemented`/`TypeError` for unsupported types. A final section uses `hypothesis` (`@given(rationnels, ...)`) for properties such as commutativity, distributivity and normalization.
 
 ## Conventions
 
