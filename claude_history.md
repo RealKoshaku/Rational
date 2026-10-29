@@ -21,3 +21,5 @@
 - 2026-10-29 — Commits et push des tests de `__neg__`, `__abs__` et `__bool__`.
 - 2026-10-29 — Commits et push de `__neg__`, `__abs__`, `__bool__` (rational.py) et de `ROADMAP.md` (cases int cochées).
 - 2026-10-29 — Mise à jour de `ROADMAP.md` : cases cochées (message de division par zéro, tests sans `int` comme type non supporté, classe immuable) en plus de `__neg__`/`__abs__`/`__bool__`.
+- 2026-10-29 — Ajout dans `tests/unit/test_rational_refonte.py` des tests de comparaisons avec `int` (`<`, `<=`, `>`, `>=`, int à gauche et à droite, `bool`, tri mixte).
+- 2026-10-29 — Commits et push des comparaisons avec `int` (rational.py, tests).
