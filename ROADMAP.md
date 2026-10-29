@@ -14,15 +14,15 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 
 - [x] Ajouter les annotations manquantes sur `__mul__` et `__truediv__` (`other: object`, `-> Rational`)
 - [x] Ajouter `__repr__` (ex. `Rational(1, 2)`) et l'utiliser dans les messages d'échec de pytest
-- [ ] Message d'erreur explicite pour la division par un `Rational` nul dans `__truediv__`
+- [x] Message d'erreur explicite pour la division par un `Rational` nul dans `__truediv__`
 - [ ] Remplacer le stub `main()` de `src/rational/__init__.py` par un vrai point d'entrée (ou retirer le script `rational`)
 - [ ] Compléter le `README.md` (description, installation, exemples d'utilisation)
 - [ ] Mettre une vraie `description` dans `pyproject.toml`
 
 ## 2. Opérateurs manquants
 
-- [ ] `__neg__` et `__abs__`
-- [ ] `__bool__` (faux pour zéro)
+- [x] `__neg__` et `__abs__`
+- [x] `__bool__` (faux pour zéro)
 - [x] `__hash__` cohérent avec `__eq__` (aujourd'hui la classe n'est pas hashable)
 - [x] Comparaisons `__lt__`, `__le__`, `__gt__`, `__ge__` (ou `functools.total_ordering`)
 - [ ] `__pow__` avec exposant entier (négatif inclus)
@@ -35,7 +35,7 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 - [x] `__eq__` avec un `int` (`Rational(2, 1) == 2`)
 - [ ] `__float__` et `__int__`
 - [ ] Construction depuis une chaîne (`"3/4"`) et/ou un `float`
-- [ ] Mettre à jour les tests : les cas « autre type » avec `int` ne doivent plus lever `TypeError`
+- [x] Mettre à jour les tests : les cas « autre type » avec `int` ne doivent plus lever `TypeError`
 
 ## 4. Qualité et outillage
 
@@ -49,6 +49,6 @@ Projet d'apprentissage : une classe `Rational` (fraction) en Python.
 ## 5. Pour aller plus loin
 
 - [ ] Réexporter `Rational` depuis `rational/__init__.py` (`from rational import Rational`)
-- [ ] Rendre la classe immuable (`__slots__`, propriétés en lecture seule, ou `dataclass(frozen=True)`)
+- [x] Rendre la classe immuable (`__slots__`, propriétés en lecture seule, ou `dataclass(frozen=True)`)
 - [ ] Comparer avec `fractions.Fraction` de la bibliothèque standard
 - [ ] Publier le paquet (build `uv_build`, puis `uv publish`)
