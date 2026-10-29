@@ -112,7 +112,7 @@ class Rational:
             return NotImplemented
 
         if other == Rational():
-            raise ZeroDivisionError(f"Cannot divide by {repr(other)}")
+            raise ZeroDivisionError(f"Cannot divide by {other!r}")
 
         return Rational(self.num * other.den, self.den * other.num)
 
@@ -135,7 +135,7 @@ class Rational:
         if isinstance(other, bool) or not isinstance(other, int):
             return NotImplemented
         if self == Rational():
-            raise ZeroDivisionError(f"Cannot divide by {repr(self)}")
+            raise ZeroDivisionError(f"Cannot divide by {self!r}")
         return Rational(other * self.den, self.num)
 
     def __pow__(self, power: int) -> Rational:
