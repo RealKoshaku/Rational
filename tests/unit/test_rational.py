@@ -1052,6 +1052,62 @@ def test_float_aller_retour_hypothesis(x):
     assert float(Rational.from_float(x)) == x
 
 
+# --- Conversion en int ----------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("r", "attendu"),
+    [
+        (R(0), 0),
+        (R(5), 5),
+        (R(-5), -5),
+        (R(1, 2), 0),
+        (R(-1, 2), 0),
+        (R(1, 3), 0),
+        (R(7, 2), 3),
+        (R(-7, 2), -3),
+        (R(9, 4), 2),
+        (R(-9, 4), -2),
+        (R(99, 100), 0),
+        (R(-99, 100), 0),
+        (R(101, 100), 1),
+        (R(-101, 100), -1),
+        (R(10**30 + 1, 10), 10**29),
+        (R(-(10**30) - 1, 10), -(10**29)),
+    ],
+)
+def test_int(r, attendu):
+    assert int(r) == attendu
+
+
+def test_int_retourne_un_int():
+    assert type(int(R(7, 2))) is int
+    assert type(int(R(3))) is int
+    assert type(int(R(0))) is int
+
+
+def test_int_tronque_vers_zero_et_non_vers_moins_infini():
+    assert int(R(-7, 2)) == -3
+    assert int(R(-7, 2)) == math.trunc(-3.5)
+    assert int(R(-7, 2)) != math.floor(-3.5)
+
+
+def test_int_aller_retour():
+    for n in [0, 1, -1, 42, -42, 10**30]:
+        assert int(R(n)) == n
+
+
+def test_int_coherent_avec_float():
+    for r in [R(7, 2), R(-7, 2), R(1, 3), R(-1, 3), R(22, 7)]:
+        assert int(r) == int(float(r))
+
+
+@pytest.mark.parametrize("r", [R(7, 2), R(-7, 2), R(1, 3), R(5), R(0)])
+def test_int_est_proche_de_la_valeur(r):
+    assert abs(r) - abs(int(r)) >= 0
+    assert abs(r) - abs(int(r)) < 1
+
+
 # --- Types non supportés --------------------------------------------------
 
 
@@ -1111,3 +1167,10 @@ def test_add_normalized(a, b):
 @given(rationnels)
 def test_float_propriete_hypothesis(r):
     assert float(r) == float(fraction(r))
+
+
+@given(rationnels)
+def test_int_propriete_hypothesis(r):
+    assert int(r) == int(fraction(r))
+    assert int(r) == math.trunc(fraction(r))
+    assert 0 <= abs(r) - abs(int(r)) < 1
