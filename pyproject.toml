@@ -22,3 +22,8 @@ build-backend = "uv_build"
 testpaths = ["tests"]
 pythonpath = ["src"] # evite les erreurs d’import
 addopts = "-ra --strict-markers --import-mode=importlib"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.170.13",
+]

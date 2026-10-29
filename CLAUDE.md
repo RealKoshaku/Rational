@@ -25,7 +25,7 @@ Small learning project: a `Rational` (fraction) class in Python, managed with `u
 
 ## Tests
 
-- Tests live in `tests/unit/test_rational.py` (and a rewrite in progress, `tests/unit/test_rational_refonte.py`) and use `@pytest.mark.parametrize` with a French `attendu` (expected) parameter. Helpers: `R(num, den)` builds instances; `paire(r)` returns `(num, den)` — use it instead of `==` on results when you want to check normalization too. Covered: normalization, `ZeroDivisionError`, `__str__` (format `"num / den"`), `__eq__`, `+ - * /` and `TypeError` for unsupported operand types.
+- Tests live in `tests/unit/test_rational.py` (and a rewrite in progress, `tests/unit/test_rational.py`) and use `@pytest.mark.parametrize` with a French `attendu` (expected) parameter. Helpers: `R(num, den)` builds instances; `paire(r)` returns `(num, den)` — use it instead of `==` on results when you want to check normalization too. Covered: normalization, `ZeroDivisionError`, `__str__` (format `"num / den"`), `__eq__`, `+ - * /` and `TypeError` for unsupported operand types.
 - The "unsupported type" tests use `int` as an unsupported operand; this conflicts with `int` support in `__add__`/`__sub__`/`__mul__`/`__truediv__`/`__eq__` and needs updating as `int` interop grows (see `ROADMAP.md` section 3).
 
 ## Conventions
