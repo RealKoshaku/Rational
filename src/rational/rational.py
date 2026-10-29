@@ -165,6 +165,9 @@ class Rational:
     def __bool__(self) -> bool:
         return self != Rational()
 
+    def __float__(self) -> float:
+        return self.num / self.den
+    
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
 
