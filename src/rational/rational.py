@@ -138,6 +138,15 @@ class Rational:
             raise ZeroDivisionError(f"Cannot divide by {repr(self)}")
         return Rational(other * self.den, self.num)
 
+    def __pow__(self, power: int) -> Rational:
+        if isinstance(power, bool) or not isinstance(power, int):
+            return NotImplemented
+        if power >= 0:
+            return Rational(pow(self.num, power), pow(self.den, power))
+        if self.num == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        return Rational(pow(self.den, -power), pow(self.num, -power))
+
     def __neg__(self) -> Rational:
         return Rational(-self.num, self.den)
 
