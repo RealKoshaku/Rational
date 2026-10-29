@@ -65,7 +65,7 @@ Rational(1, 2) < 1           # True
 sorted([Rational(1, 2), 0, Rational(-1, 3)])  # [Rational(-1, 3), 0, Rational(1, 2)]
 ```
 
-Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotImplemented`, so Python raises `TypeError`. Division by a zero `Rational` or by `0` raises `ZeroDivisionError`.
+Unsupported operand types (`float`, `str`, `None`, ...) and `bool` return `NotImplemented`, so Python raises `TypeError` for arithmetic, `**` and ordering comparisons (`<`, `<=`, `>`, `>=`). `==` and `!=` simply return `False` / `True` for those types. Division by a zero `Rational` or by `0` raises `ZeroDivisionError`.
 
 ## Development
 
