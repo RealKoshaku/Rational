@@ -92,3 +92,42 @@ def test_add():
 
 def test_sub():
     assert R(1, 2) - R(1, 3) == R(1, 6)
+
+def test_mul():
+    assert R(2, 3) * R(3, 4) == R(1, 2)
+
+def test_truediv():
+    assert R(1, 2) / R(1, 4) == R(2, 1)
+
+def test_truediv_par_zero():
+    with pytest.raises(ZeroDivisionError):
+        R(1, 2) / R(0)
+
+def test_str():
+    assert str(R(1, 2)) == "1 / 2"
+
+def test_immuable():
+    r = R(1, 2)
+    with pytest.raises(AttributeError):
+        r.num = 5
+
+@pytest.mark.parametrize("num, den", [(1.5, 2), (1, 2.0), ("1", 2), (True, 1)])
+def test_type_invalide(num, den):
+    with pytest.raises(TypeError):
+        Rational(num, den)
+
+@pytest.mark.parametrize("autre", [0.5, "1/2", None, True])
+def test_eq_autre_type(autre):
+    assert R(1, 2) != autre
+
+import operator
+
+@pytest.mark.parametrize(
+    "op",
+    [operator.add, operator.sub, operator.mul, operator.truediv,
+     operator.lt, operator.le, operator.gt, operator.ge],
+)
+@pytest.mark.parametrize("autre", [0.5, "1/2", None])
+def test_operateur_autre_type(op, autre):
+    with pytest.raises(TypeError):
+        op(R(1, 2), autre)
