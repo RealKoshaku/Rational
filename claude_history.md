@@ -12,3 +12,4 @@
 - 2026-10-28 — Création de `ROADMAP.md` (roadmap cochable du projet).
 - 2026-10-28 — Commit et push de `ROADMAP.md`.
 - 2026-10-29 — Mise à jour de `CLAUDE.md` via `/init` (dataclass figée, `__hash__`/`__eq__`, support des `int`, tests, ROADMAP).
+- 2026-10-29 — Création de `tests/unit/test_rational_refonte.py` (nouvelle version des tests, basée sur `test_rational.py`).

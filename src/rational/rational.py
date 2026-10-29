@@ -10,15 +10,15 @@ class Rational:
         for value in (self.num, self.den):
             if isinstance(value, bool) or not isinstance(value, int):
                 raise TypeError(f"num and den must be int, not {type(value).__name__}")
-            if self.den == 0:
-                raise ZeroDivisionError("Cannot divide by zero.")
-            num, den = self.num, self.den
+        if self.den == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        num, den = self.num, self.den
 
-            sign_den: int = abs(den) // den
-            g: int = gcd(num, den)
+        sign_den: int = abs(den) // den
+        g: int = gcd(num, den)
 
-            object.__setattr__(self, "num", sign_den * num // g)
-            object.__setattr__(self, "den", sign_den * den // g)
+        object.__setattr__(self, "num", sign_den * num // g)
+        object.__setattr__(self, "den", sign_den * den // g)
 
     def __hash__(self) -> int:
         if self.den == 1:
