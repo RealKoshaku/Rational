@@ -18,7 +18,7 @@ uv sync
 ## Usage
 
 ```python
-from rational.rational import Rational
+from rational import Rational
 
 a = Rational(1, 2)
 b = Rational(1, 3)
@@ -31,8 +31,6 @@ Rational(2, 3) ** -2  # Rational(9, 4)
 
 str(Rational(2, 4))   # '1 / 2'
 ```
-
-`Rational` is not re-exported from the `rational` package yet: import it from `rational.rational`.
 
 ### Normalization
 
@@ -80,7 +78,7 @@ No linter or formatter is configured yet. See [`ROADMAP.md`](ROADMAP.md) for pla
 
 ```text
 src/rational/rational.py   the Rational class
-src/rational/__init__.py   console-script entry point (still a stub)
+src/rational/__init__.py   re-exports Rational; console-script entry point (still a stub)
 tests/unit/                pytest test suite
 ROADMAP.md                 checklist of planned and finished work
 ```
