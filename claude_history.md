@@ -32,3 +32,5 @@
 - 2026-10-29 — `CLAUDE.md` mis à jour (dépendances dev, ruff, plus de script console, opérateurs/tests actuels); commits et push.
 - 2026-10-29 — `README.md` et `CLAUDE.md` : ajout de `uv run ruff format`.
 - 2026-10-29 — `ROADMAP.md` : linter/formatter coché; commits et push.
+- 2026-10-29 — `README.md` : ajout de `pyright` (dépendance dev, commande, configuration strict sur `src/`).
+- 2026-10-29 — `CLAUDE.md` et `ROADMAP.md` : pyright documenté et coché; commits et push.
