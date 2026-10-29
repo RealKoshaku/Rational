@@ -168,6 +168,17 @@ class Rational:
     def __float__(self) -> float:
         return self.num / self.den
 
+    def __int__(self) -> int:
+        if self == Rational():
+            return 0
+
+        if self.den == 1:
+            return self.num
+
+        sign_num: int = abs(self.num) // self.num
+        return sign_num * int((sign_num * self.num) // self.den)
+
+
     def __str__(self) -> str:
         return f"{self.num} / {self.den}"
 
